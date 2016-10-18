@@ -2,4 +2,55 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="elevation_4dp">4dp</dimen>
+    <dimen name="elevation_5dp">5dp</dimen>
+    <dimen name="elevation_6dp">6dp</dimen>
+    <dimen name="margin_15dp">15dp</dimen>
+    <dimen name="margin_25dp">25dp</dimen>
+    <dimen name="margin_35dp">35dp</dimen>
+    <dimen name="margin_91dp">91dp</dimen>
+    <dimen name="margin_40dp">40dp</dimen>
+    <dimen name="margin_50dp">50dp</dimen>
+    <dimen name="margin_70dp">70dp</dimen>
+    <dimen name="padding_5dp">5dp</dimen>
+    <dimen name="margin_10dp">10dp</dimen>
+    <dimen name="margin_20dp">20dp</dimen>
+    <dimen name="margin_5dp">5dp</dimen>
+    <dimen name="margin_2dp">2dp</dimen>
+    <dimen name="padding_10dp">10dp</dimen>
+    <dimen name="padding_15dp">15dp</dimen>
+    <dimen name="padding_20dp">20dp</dimen>
+    <dimen name="padding_2dp">2dp</dimen>
+    <dimen name="text_height_40dp">40dp</dimen>
+    <dimen name="height_20dp">20dp</dimen>
+    <dimen name="height_50dp">50dp</dimen>
+    <dimen name="width_50dp">50dp</dimen>
+    <dimen name="height_40dp">40dp</dimen>
+    <dimen name="height_48dp">48dp</dimen>
+    <dimen name="width_100dp">100dp</dimen>
+    <dimen name="height_15dp">15dp</dimen>
+    <dimen name="text_20sp">20sp</dimen>
+    <dimen name="text_24sp">24sp</dimen>
+    <dimen name="text_16sp">16sp</dimen>
+    <dimen name="text_18sp">18sp</dimen>
+    <dimen name="text_14sp">14sp</dimen>
+    <dimen name="text_36.25sp">36.25sp</dimen>
+    <dimen name="text_6sp">6sp</dimen>
+    <dimen name="text_10sp">10sp</dimen>
+    <dimen name="margin_top_10dp">10dp</dimen>
+    <dimen name="margin_top_30dp">30dp</dimen>
+    <dimen name="margin_bottom_30dp">30dp</dimen>
+    <dimen name="margin">10dp</dimen>
+    <dimen name="height_60dp">60dp</dimen>
+    <dimen name="height_80dp">80dp</dimen>
+
+    <dimen name="text_size_14sp">14sp</dimen>
+    <dimen name="text_12sp">12sp</dimen>
+    <dimen name="text_8sp">8sp</dimen>
+    <dimen name="text_22sp">22sp</dimen>
+
+    <dimen name="card_elevation_2dp">2dp</dimen>
+    <dimen name="card_elevation_4dp">4dp</dimen>
+    <dimen name="card_elevation_6dp">6dp</dimen>
 </resources>

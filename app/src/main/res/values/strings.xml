@@ -1,3 +1,35 @@
 <resources>
     <string name="app_name">VisitorApp</string>
+
+    <!--the default font-->
+    <string name="fontFamily__roboto_regular">sans-serif</string>
+    <string name="fontFamily__roboto_light">sans-serif-light</string>
+    <string name="fontFamily__roboto_condensed">sans-serif-condensed</string>
+    <string name="admin_login">Admin Login</string>
+    <string name="welcome_to_service_foods_auckland">Welcome to Service Foods - Auckland</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="please_remenber_to_sign_out_when_exiting_the_building">Please remenber to sign out when exiting the building</string>
+    <string name="string_info">
+<font color="#a66f1a"><b>Hazards</b></font>\n
+
+    Wet/Slippery Floors - Keep floor clean &amp; dry. Wear non slip shoes\n\n
+    Electricity - Follow insulation procedures &amp; turn off and unplug power supply when working on electrical equipment.\n\n
+    Sharp Surfaces - Many edges can be sharp. Check carefully before starting. Report unsafe edges to Manager.\n\n
+    Traffic/Fork Lift operation - Be aware of moving hazards such as vehicles &amp; forklifts. All areas must be kept clear at all times.\n\n\n
+
+<font color="#a66f1a">Emergency Procedures</font>\n
+
+    Evacuate through nearest exit when instructed by manager or on alarm –\n\n
+
+Identify exits Identify managers Identify Assembly point\n
+<font color="#a66f1a">Accident/Near Miss Reporting -</font> Inform to Manager immediately\n
+<font color="#a66f1a">Compliance with Minimum Standards -</font> Work area is tidy and clear of tools\n\n
+
+    Work doesn’t impact on employee safety\n
+    Work site is secure at all times. Hazards are controlled and warning signs are posted.\n
+    I agree to do the work that has been authorised.\n
+    I agree to meet the requirements above and take note of the hazard. I have declared the hazards I will bring into the premises. I confirm that I have the necessary current qualification to do the work. I will follow company’s procedures as instructed by Manager or Owner.\n\n
+
+</string>
 </resources>
