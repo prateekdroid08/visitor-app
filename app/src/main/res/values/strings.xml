@@ -13,23 +13,36 @@
     <string name="string_info">
 <font color="#a66f1a"><b>Hazards</b></font>\n
 
-    Wet/Slippery Floors - Keep floor clean &amp; dry. Wear non slip shoes\n\n
-    Electricity - Follow insulation procedures &amp; turn off and unplug power supply when working on electrical equipment.\n\n
-    Sharp Surfaces - Many edges can be sharp. Check carefully before starting. Report unsafe edges to Manager.\n\n
-    Traffic/Fork Lift operation - Be aware of moving hazards such as vehicles &amp; forklifts. All areas must be kept clear at all times.\n\n\n
+    -\Wet/Slippery Floors - Keep floor clean &amp; dry. Wear non slip shoes\n\n
+    -\Electricity - Follow insulation procedures &amp; turn off and unplug power supply when working on electrical equipment.\n\n
+    -\Sharp Surfaces - Many edges can be sharp. Check carefully before starting. Report unsafe edges to Manager.\n\n
+    -\Traffic/Fork Lift operation - Be aware of moving hazards such as vehicles &amp; forklifts. All areas must be kept clear at all times.\n\n\n
 
 <font color="#a66f1a">Emergency Procedures</font>\n
 
-    Evacuate through nearest exit when instructed by manager or on alarm –\n\n
+    -\Evacuate through nearest exit when instructed by manager or on alarm –\n\n
 
-Identify exits Identify managers Identify Assembly point\n
-<font color="#a66f1a">Accident/Near Miss Reporting -</font> Inform to Manager immediately\n
-<font color="#a66f1a">Compliance with Minimum Standards -</font> Work area is tidy and clear of tools\n\n
+-\Identify exits Identify managers Identify Assembly point\n
+<font color="#a66f1a">Accident/Near Miss Reporting -</font> -\Inform to Manager immediately\n
+<font color="#a66f1a">Compliance with Minimum Standards -</font>-\ Work area is tidy and clear of tools\n\n
 
-    Work doesn’t impact on employee safety\n
-    Work site is secure at all times. Hazards are controlled and warning signs are posted.\n
-    I agree to do the work that has been authorised.\n
-    I agree to meet the requirements above and take note of the hazard. I have declared the hazards I will bring into the premises. I confirm that I have the necessary current qualification to do the work. I will follow company’s procedures as instructed by Manager or Owner.\n\n
+    -\Work doesn’t impact on employee safety\n
+    -\Work site is secure at all times. Hazards are controlled and warning signs are posted.\n
+    -\I agree to do the work that has been authorised.\n
+    -\I agree to meet the requirements above and take note of the hazard. I have declared the hazards I will bring into the premises. I confirm that I have the necessary current qualification to do the work. I will follow company’s procedures as instructed by Manager or Owner.\n\n
 
 </string>
+    <string name="visitor_guideline">
+    -\All visitors must have authorisation to enter any area where public is excluded.\n\n
+    -\Where required or designated, approved safety equipment must be used.\n\n
+    -\All areas must be kept clear and free of hazards.\n\n
+    -\Be aware of moving hazards such as vehicles/fork lifts and mobile plant.\n\n
+    -\Follow recommended procedures for handling hazardous materials.\n\n
+    -\Keep aisles, exits, driveways and fire-extinguisher accesses clear.\n\n
+    -\Before entering any area observe safety signs and rules.\n\n
+    -\Report all accidents and incidents, including near misses to the Manager.\n\n
+    -\Be fully aware of evacuation and emergency procedures.\n\n
+    -\Maintain an appropriate standard of housekeeping and general hygiene.\n\n
+</string>
+    <string name="please_write_the_full_name_of_all_the_members_seperate_names_by_comma">Please write the full name of all the Members Seperate names by Comma(,)</string>
 </resources>
