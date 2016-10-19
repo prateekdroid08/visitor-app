@@ -40,16 +40,17 @@
                     android:src="@drawable/images" />
 
                 <TextView
+                    android:id="@+id/admin_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:layout_marginTop="@dimen/margin_5dp"
-                    android:textColor="@color/colorPrimary"
                     android:fontFamily="@string/fontFamily__roboto_condensed"
                     android:gravity="right"
                     android:padding="@dimen/padding_10dp"
                     android:text="@string/admin_login"
                     android:textAlignment="gravity"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_18sp" />
 
 
@@ -66,6 +67,7 @@
 
 
                 <TextView
+                    android:id="@+id/system_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_5dp"
@@ -75,6 +77,7 @@
                     android:textSize="@dimen/text_18sp" />
 
                 <TextView
+                    android:id="@+id/system_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_5dp"
@@ -84,6 +87,7 @@
                     android:textSize="@dimen/text_18sp" />
 
                 <TextView
+                    android:id="@+id/signIn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_25dp"
@@ -93,18 +97,18 @@
                     android:fontFamily="@string/fontFamily__roboto_condensed"
                     android:gravity="center"
                     android:padding="@dimen/padding_20dp"
-                    android:textColor="@color/colorPrimary"
                     android:text="@string/sign_in"
                     android:textAlignment="gravity"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_20sp" />
 
 
                 <TextView
+                    android:id="@+id/signOut"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_25dp"
                     android:layout_marginRight="@dimen/margin_25dp"
-                    android:textColor="@color/colorPrimary"
                     android:layout_marginTop="@dimen/margin_10dp"
                     android:background="@drawable/custom_button_background"
                     android:fontFamily="@string/fontFamily__roboto_condensed"
@@ -112,6 +116,7 @@
                     android:padding="@dimen/padding_20dp"
                     android:text="@string/sign_out"
                     android:textAlignment="gravity"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_20sp" />
 
 
@@ -119,10 +124,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_10dp"
-                    android:textColor="@color/colorPrimary"
                     android:fontFamily="@string/fontFamily__roboto_condensed"
                     android:padding="@dimen/padding_10dp"
                     android:text="@string/please_remenber_to_sign_out_when_exiting_the_building"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_18sp" />
 
             </LinearLayout>
