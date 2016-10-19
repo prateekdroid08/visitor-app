@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.visitorapp.bloominfotech.R;
+import com.visitorapp.bloominfotech.views.activity.HomeActivity;
 
 import butterknife.ButterKnife;
 
@@ -30,6 +31,10 @@ public class FragmentVisitorForm extends Fragment {
         view = inflater.inflate(R.layout.fragment_visitor_form, container, false);
  /*init butterknife*/
         ButterKnife.bind(this, view);
+
+        ((HomeActivity) getActivity()).toolbar.setVisibility(View.GONE);
+        ((HomeActivity) getActivity()).mToolbarTitle.setText("Visitor Form");
+
 
 
 

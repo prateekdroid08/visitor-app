@@ -9,7 +9,7 @@
         android:name=".VisitorApplication"
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
-        <activity android:name=".VisitorActivity">
+        <activity android:name=".views.activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

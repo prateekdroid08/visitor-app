@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.visitorapp.bloominfotech.R;
+import com.visitorapp.bloominfotech.views.activity.HomeActivity;
 
 import butterknife.ButterKnife;
 
@@ -30,7 +31,8 @@ public class FragmentAdminLogin extends Fragment {
         view = inflater.inflate(R.layout.fragment_admin_login, container, false);
  /*init butterknife*/
         ButterKnife.bind(this, view);
-
+        ((HomeActivity) getActivity()).toolbar.setVisibility(View.GONE);
+        ((HomeActivity) getActivity()).mToolbarTitle.setText("Admin Login");
 
         return view;
     }

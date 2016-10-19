@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import com.visitorapp.bloominfotech.presenter.main_presenter.VisitorPresenter;
 import com.visitorapp.bloominfotech.presenter.main_presenter.VisitorPresenterImpl;
@@ -18,6 +19,9 @@ public class VisitorActivity extends AppCompatActivity implements VisitorView{
 
     @Bind(R.id.toolbar)
     public Toolbar toolbar;
+
+    @Bind(R.id.toolbar_title)
+    public TextView mToolbarTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

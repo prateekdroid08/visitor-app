@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.visitorapp.bloominfotech.R;
+import com.visitorapp.bloominfotech.views.activity.HomeActivity;
 
 import butterknife.ButterKnife;
 
@@ -30,6 +31,9 @@ public class FragmentChooser extends Fragment {
         view = inflater.inflate(R.layout.fragment_choose_type, container, false);
  /*init butterknife*/
         ButterKnife.bind(this, view);
+
+        ((HomeActivity) getActivity()).toolbar.setVisibility(View.GONE);
+        ((HomeActivity) getActivity()).mToolbarTitle.setText("");
 
 
 

@@ -3,9 +3,25 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="@android:color/transparent"
+    android:background="@color/colorPrimary"
     android:minHeight="?attr/actionBarSize">
 
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@string/fontFamily__roboto_condensed"
+            android:text=""
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/text_18sp" />
+
+
+    </FrameLayout>
 
 </android.support.v7.widget.Toolbar>
