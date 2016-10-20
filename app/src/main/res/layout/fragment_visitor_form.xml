@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-
+android:animateLayoutChanges="true"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
@@ -52,6 +52,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/margin_5dp"
                     android:layout_height="wrap_content">
 
                     <EditText
@@ -69,6 +70,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/margin_5dp"
                     android:layout_height="wrap_content">
 
                     <EditText
@@ -87,6 +89,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/margin_5dp"
                     android:layout_height="wrap_content">
 
                     <EditText
@@ -104,12 +107,13 @@
 
 
                 <TextView
+                    android:id="@+id/tv_add_member"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_40dp"
                     android:layout_marginRight="@dimen/margin_40dp"
                     android:layout_marginTop="@dimen/margin_5dp"
-                    android:background="@drawable/button_background_add_more"
+                    android:background="@drawable/button_selector"
                     android:drawableLeft="@drawable/ic_action_arrow_left"
                     android:gravity="center"
                     android:text="Add Members"
@@ -119,7 +123,10 @@
 
 
                 <LinearLayout
+                    android:id="@+id/ll_add_member_container"
                     android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:animateLayoutChanges="true"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
@@ -167,6 +174,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/margin_5dp"
                     android:layout_height="wrap_content">
 
                     <EditText
@@ -185,6 +193,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/margin_5dp"
                     android:layout_height="wrap_content">
 
                     <EditText
@@ -203,6 +212,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/margin_5dp"
                     android:layout_height="wrap_content">
 
                     <EditText
@@ -221,6 +231,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/margin_5dp"
                     android:layout_height="wrap_content">
 
                     <EditText
@@ -239,6 +250,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/margin_5dp"
                     android:layout_height="wrap_content">
 
                     <EditText
@@ -257,6 +269,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/margin_5dp"
                     android:layout_height="wrap_content">
 
                     <EditText
@@ -274,6 +287,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/margin_5dp"
                     android:layout_height="wrap_content">
 
                     <EditText
@@ -300,7 +314,7 @@
                     android:layout_marginLeft="@dimen/margin_40dp"
                     android:layout_marginRight="@dimen/margin_40dp"
                     android:layout_marginTop="@dimen/margin_5dp"
-                    android:background="@drawable/button_background_add_more"
+                    android:background="@drawable/button_selector"
                     android:gravity="center"
                     android:text="Submit"
                     android:textAlignment="gravity"
@@ -311,7 +325,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_20dp"
+                    android:layout_marginBottom="@dimen/margin_40dp"
                     android:layout_marginTop="@dimen/margin_20dp"
                     android:fontFamily="@string/fontFamily__roboto_condensed"
                     android:padding="@dimen/padding_10dp"

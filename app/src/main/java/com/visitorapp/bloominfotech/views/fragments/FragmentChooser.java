@@ -11,6 +11,7 @@ import com.visitorapp.bloominfotech.R;
 import com.visitorapp.bloominfotech.views.activity.HomeActivity;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by hp on 10/19/2016.
@@ -36,12 +37,23 @@ public class FragmentChooser extends Fragment {
         ((HomeActivity) getActivity()).mToolbarTitle.setText("");
 
 
-
-
-
-
         return view;
     }
+
+
+    @OnClick(R.id.contractor)
+    public void methodContractor(View view) {
+
+        ((HomeActivity) getActivity()).visitorPresenter.navigateTo(FragmentContractorAcknowledge.newInstance());
+    }
+
+
+    @OnClick(R.id.visitor)
+    public void methodVistor(View view) {
+        ((HomeActivity) getActivity()).visitorPresenter.navigateTo(FragmentVistorAcknowledge.newInstance());
+
+    }
+
 
     @Override
     public void onDestroy() {

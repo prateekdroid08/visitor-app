@@ -6,11 +6,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.visitorapp.bloominfotech.R;
 import com.visitorapp.bloominfotech.views.activity.HomeActivity;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by hp on 10/19/2016.
@@ -25,6 +29,16 @@ public class FragmentVisitorForm extends Fragment {
         return fragmentVisitorForm;
     }
 
+
+    @Bind(R.id.ll_add_member_container)
+    public LinearLayout mLLContainer;
+
+
+    @Bind(R.id.tv_add_member)
+    public TextView mAddMember;
+
+    boolean addmembercontainer = false;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,12 +50,20 @@ public class FragmentVisitorForm extends Fragment {
         ((HomeActivity) getActivity()).mToolbarTitle.setText("Visitor Form");
 
 
-
-
-
-
-
         return view;
+    }
+
+    @OnClick(R.id.tv_add_member)
+    public void methodAddmember(View view) {
+        if (!addmembercontainer) {
+            mLLContainer.setVisibility(View.VISIBLE);
+            addmembercontainer = true;
+        } else {
+            mLLContainer.setVisibility(View.GONE);
+            addmembercontainer = false;
+
+        }
+
     }
 
     @Override
