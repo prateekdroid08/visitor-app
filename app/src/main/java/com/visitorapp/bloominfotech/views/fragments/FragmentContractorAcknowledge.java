@@ -11,6 +11,7 @@ import com.visitorapp.bloominfotech.R;
 import com.visitorapp.bloominfotech.views.activity.HomeActivity;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by hp on 10/19/2016.
@@ -36,12 +37,13 @@ public class FragmentContractorAcknowledge extends Fragment {
         ((HomeActivity) getActivity()).mToolbarTitle.setText("");
 
 
-
-
-
-
-
         return view;
+    }
+
+    @OnClick(R.id.agree_acknowlede_contractor)
+    public void methodContractorAcknowledge(View view) {
+
+        ((HomeActivity) getActivity()).visitorPresenter.navigateTo(FragmentVisitorForm.newInstance());
     }
 
     @Override
