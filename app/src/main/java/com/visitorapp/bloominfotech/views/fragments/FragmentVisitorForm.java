@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -37,6 +38,40 @@ public class FragmentVisitorForm extends Fragment {
     @Bind(R.id.tv_add_member)
     public TextView mAddMember;
 
+
+    @Bind(R.id.visitor_email)
+    public EditText visitor_email;
+
+    @Bind(R.id.visitor_first_name)
+    public EditText visitor_first_name;
+
+    @Bind(R.id.visitor_Last_name)
+    public EditText visitor_Last_name;
+
+    @Bind(R.id.visitor_company_name)
+    public EditText visitor_company_name;
+
+    @Bind(R.id.phone_number)
+    public EditText phone_number;
+
+
+    @Bind(R.id.car_registration)
+    public EditText car_registration;
+
+
+    @Bind(R.id.purpose_of_visit)
+    public EditText purpose_of_visit;
+
+
+    @Bind(R.id.meeting_with)
+    public EditText meeting_with;
+
+    @Bind(R.id.visitor_add_members)
+    public EditText visitor_add_members;
+
+    @Bind(R.id.submit)
+    public TextView submit;
+
     boolean addmembercontainer = false;
 
     @Nullable
@@ -61,6 +96,7 @@ public class FragmentVisitorForm extends Fragment {
         } else {
             mLLContainer.setVisibility(View.GONE);
             addmembercontainer = false;
+            visitor_add_members.setText("");
 
         }
 
