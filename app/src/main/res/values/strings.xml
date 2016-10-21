@@ -41,4 +41,6 @@
     I agree to do the work that has been authorised.\n\n
     I agree to meet the requirements above and take note of the hazard. I have declared the hazards I will bring into the premises. I confirm that I have the necessary current qualification to do the work. I will follow company’s procedures as instructed by Manager or Owner.\n\n
 </string>
+
+    <string name="set_date_time"><![CDATA[Set Date & Time]]></string>
 </resources>

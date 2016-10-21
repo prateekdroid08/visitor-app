@@ -69,7 +69,7 @@
                         android:textSize="@dimen/text_18sp" />
 
                     <EditText
-
+android:id="@+id/dateFrom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/custom_button_background"
@@ -103,7 +103,7 @@
                         android:textSize="@dimen/text_18sp" />
 
                     <EditText
-
+                        android:id="@+id/dateTo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/custom_button_background"
