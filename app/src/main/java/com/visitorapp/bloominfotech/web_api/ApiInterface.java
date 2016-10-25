@@ -1,6 +1,8 @@
 package com.visitorapp.bloominfotech.web_api;
 
 
+import com.visitorapp.bloominfotech.models.companies.ResponseCompanies;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -16,14 +18,9 @@ import retrofit2.http.Query;
  */
 public interface ApiInterface {
 
-   /* @POST("User/Verify")
-    Call<ResponseUserLogin> getVerifyAccountAPI(@Query("userID") int userID, @Query("OTP") int OTP);
 
-
-    @GET("User/GetProfessionalsByLocationIDForUserApp")
-    Call<ResponseProfessionalsData> getProfessionalsHint(@Query("loggedInUserID") int loggedInUserID, @Query("pageIndex") int pageIndex, @Query("pageSize") int pageSize, @Query("locationID") int locationID);
-
-*/
+    @GET("CompanyAPI")
+    Call<ResponseCompanies> getComapnyAPI(@Query("companyID") String companyID, @Query("page") int page, @Query("getAll") boolean getAll);
 
 
 }
