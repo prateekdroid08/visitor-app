@@ -43,4 +43,7 @@
 </string>
 
     <string name="set_date_time"><![CDATA[Set Date & Time]]></string>
+
+    <string name="no_internet">No internet connection available.</string>
+
 </resources>

@@ -11,7 +11,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.visitorapp.bloominfotech.R;
+import com.visitorapp.bloominfotech.constants.Constants;
+import com.visitorapp.bloominfotech.models.eventbus.MessageEvent;
 import com.visitorapp.bloominfotech.views.activity.HomeActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -49,7 +54,7 @@ public class FragmentVisitorForm extends Fragment {
     public EditText visitor_Last_name;
 
     @Bind(R.id.visitor_company_name)
-    public EditText visitor_company_name;
+    public EditText mVisitor_company_name;
 
     @Bind(R.id.phone_number)
     public EditText phone_number;
@@ -84,7 +89,7 @@ public class FragmentVisitorForm extends Fragment {
         ((HomeActivity) getActivity()).toolbar.setVisibility(View.GONE);
         ((HomeActivity) getActivity()).mToolbarTitle.setText("Visitor Form");
 
-
+        mVisitor_company_name.setText(Constants.DEFAULT_COMPANY_NAME);
         return view;
     }
 
@@ -102,10 +107,53 @@ public class FragmentVisitorForm extends Fragment {
 
     }
 
+    @OnClick(R.id.visitor_company_name)
+    public void methodAddcompany(View view) {
+
+
+        ((HomeActivity) getActivity()).visitorPresenter.navigateTo(FragmentCompanyList.newInstance());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mVisitor_company_name.setText(Constants.DEFAULT_COMPANY_NAME+"");
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
+    }
+
+    @Subscribe
+    public void onEventMainThread(MessageEvent event) {
+
+
+        EventBus.getDefault().removeStickyEvent(event.message);
+        if (event.message.equalsIgnoreCase("companyselected")) {
+            mVisitor_company_name.setText(Constants.DEFAULT_COMPANY_NAME+"");
+        }
+
+
     }
 
 
