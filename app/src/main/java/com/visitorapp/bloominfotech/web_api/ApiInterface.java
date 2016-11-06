@@ -1,6 +1,7 @@
 package com.visitorapp.bloominfotech.web_api;
 
 
+import com.visitorapp.bloominfotech.models.PostResponse;
 import com.visitorapp.bloominfotech.models.companies.ResponseCompanies;
 import com.visitorapp.bloominfotech.models.meeting.MeetingResponse;
 import com.visitorapp.bloominfotech.models.purpose.PurposeAPIResponse;
@@ -30,5 +31,7 @@ public interface ApiInterface {
     @GET("MeetingAPI")
     Call<MeetingResponse> getMeetingAPI(@Query("CompanyID") String companyID, @Query("page") int page, @Query("getAll") boolean getAll);
 
+    @POST("UserAPI")
+    Call<PostResponse> postUserData(@Body HashMap hashMap);
 
 }
