@@ -28,7 +28,7 @@ public class VisitorPresenterImpl implements VisitorPresenter{
     @Override
     public void navigateTo(Fragment fragment) {
         FragmentTransaction fts = ((VisitorActivity) ctx).getSupportFragmentManager().beginTransaction();
-        fts.replace(R.id.fragmentHolder, fragment);
+        fts.add(R.id.fragmentHolder, fragment);
         fts.addToBackStack(fragment.getClass().getSimpleName());
         fts.commit();
     }
