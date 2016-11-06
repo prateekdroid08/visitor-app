@@ -2,6 +2,8 @@ package com.visitorapp.bloominfotech.web_api;
 
 
 import com.visitorapp.bloominfotech.models.companies.ResponseCompanies;
+import com.visitorapp.bloominfotech.models.meeting.MeetingResponse;
+import com.visitorapp.bloominfotech.models.purpose.PurposeAPIResponse;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,6 +23,12 @@ public interface ApiInterface {
 
     @GET("CompanyAPI")
     Call<ResponseCompanies> getComapnyAPI(@Query("companyID") String companyID, @Query("page") int page, @Query("getAll") boolean getAll);
+
+    @GET("PurposeVisitorAPI")
+    Call<PurposeAPIResponse> getPurposeAPI(@Query("PurposeID") String purposeId);
+
+    @GET("MeetingAPI")
+    Call<MeetingResponse> getMeetingAPI(@Query("CompanyID") String companyID, @Query("page") int page, @Query("getAll") boolean getAll);
 
 
 }

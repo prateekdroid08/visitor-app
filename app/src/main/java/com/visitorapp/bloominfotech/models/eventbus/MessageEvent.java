@@ -5,7 +5,7 @@ package com.visitorapp.bloominfotech.models.eventbus;
  */
 public class MessageEvent {
 
-    public final String message;
+    public String message;
 
     public MessageEvent(String message) {
         this.message = message;

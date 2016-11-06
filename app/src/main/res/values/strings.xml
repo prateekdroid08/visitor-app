@@ -45,5 +45,8 @@
     <string name="set_date_time"><![CDATA[Set Date & Time]]></string>
 
     <string name="no_internet">No internet connection available.</string>
+    <string name="company_selected">companyselected</string>
+    <string name="purpose_selected">purposeselected</string>
+    <string name="meeting_selected">meetingselected</string>
 
 </resources>

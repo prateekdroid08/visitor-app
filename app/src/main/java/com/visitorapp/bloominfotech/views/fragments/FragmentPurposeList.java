@@ -16,13 +16,19 @@ import android.widget.TextView;
 import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 import com.visitorapp.bloominfotech.R;
 import com.visitorapp.bloominfotech.adapters.CompanyAdapter;
+import com.visitorapp.bloominfotech.adapters.PurposeAdapter;
 import com.visitorapp.bloominfotech.constants.Constants;
 import com.visitorapp.bloominfotech.interfaces.OnCompanyItemClick;
+import com.visitorapp.bloominfotech.interfaces.OnPurposeItemClick;
 import com.visitorapp.bloominfotech.models.companies.ResponseCompanies;
 import com.visitorapp.bloominfotech.models.eventbus.MessageEvent;
+import com.visitorapp.bloominfotech.models.purpose.PurposeAPIResponse;
 import com.visitorapp.bloominfotech.presenter.companies.CompanyListView;
 import com.visitorapp.bloominfotech.presenter.companies.CompanylistPresenter;
 import com.visitorapp.bloominfotech.presenter.companies.CompanylistPresenterImpl;
+import com.visitorapp.bloominfotech.presenter.purpose_of_visit.PurposePresenter;
+import com.visitorapp.bloominfotech.presenter.purpose_of_visit.PurposePresenterImpl;
+import com.visitorapp.bloominfotech.presenter.purpose_of_visit.PurposeView;
 import com.visitorapp.bloominfotech.utils.SpacesItemDecoration;
 import com.visitorapp.bloominfotech.utils.ViewUtils;
 import com.visitorapp.bloominfotech.views.activity.HomeActivity;
@@ -34,7 +40,7 @@ import de.greenrobot.event.EventBus;
 /**
  * Created by hp on 10/25/2016.
  */
-public class FragmentCompanyList extends Fragment implements CompanyListView, OnCompanyItemClick {
+public class FragmentPurposeList extends Fragment implements PurposeView, OnPurposeItemClick {
 
     View view;
 
@@ -53,14 +59,16 @@ public class FragmentCompanyList extends Fragment implements CompanyListView, On
     TextView error_message;
 
     LinearLayoutManager mLayoutManager;
-    CompanylistPresenter companylistPresenter;
-    CompanyAdapter mAdapter;
+    PurposePresenter purposePresenter;
+    PurposeAdapter mAdapter;
     int Pageindex = 0;
-    ResponseCompanies lstjob = new ResponseCompanies();
+
+    PurposeAPIResponse purposeAPIResponse = new PurposeAPIResponse();
+
     boolean IsSwipeRefreshLayoutActive = false;
 
-    public static FragmentCompanyList newInstance() {
-        FragmentCompanyList fragmentCompanyList = new FragmentCompanyList();
+    public static FragmentPurposeList newInstance() {
+        FragmentPurposeList fragmentCompanyList = new FragmentPurposeList();
         return fragmentCompanyList;
     }
 
@@ -68,13 +76,16 @@ public class FragmentCompanyList extends Fragment implements CompanyListView, On
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_companies, container, false);
- /*init butterknife*/
+
+        /*init butterknife*/
         ButterKnife.bind(this, view);
-        companylistPresenter = new CompanylistPresenterImpl(getActivity(), this);
+
+        purposePresenter = new PurposePresenterImpl(getActivity(), this);
 
           /*recycler view properties*/
         mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
+
         // 3. set item animator to DefaultAnimator
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -85,8 +96,9 @@ public class FragmentCompanyList extends Fragment implements CompanyListView, On
         }
 
         recyclerView.setHasFixedSize(true);
-/*setting adapter*/
-        mAdapter = new CompanyAdapter(getActivity(), lstjob, this);
+
+        /*setting adapter*/
+        mAdapter = new PurposeAdapter(getActivity(), purposeAPIResponse, this);
         recyclerView.setAdapter(mAdapter);
 
 
@@ -96,19 +108,19 @@ public class FragmentCompanyList extends Fragment implements CompanyListView, On
             public void onRefresh() {
 
                 IsSwipeRefreshLayoutActive = true;
-                getCompanyListData();
+                getPurposeListData();
             }
 
 
         });
 
-        getCompanyListData();
+        getPurposeListData();
 
         return view;
     }
 
-    private void getCompanyListData() {
-        companylistPresenter.getCompanyList("", Pageindex, true);
+    private void getPurposeListData() {
+        purposePresenter.getAllPurpose();
     }
 
     @Override
@@ -119,19 +131,20 @@ public class FragmentCompanyList extends Fragment implements CompanyListView, On
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         }
+
         ButterKnife.unbind(this);
     }
 
 
     @Override
-    public void onSuccess(ResponseCompanies responseCompanies) {
+    public void onSuccess(PurposeAPIResponse purposeAPIResponse) {
         if (mSwipeRefreshLayout != null) {
             if (mSwipeRefreshLayout.isRefreshing() == true) {
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         }
-        if (responseCompanies != null) {
-            this.lstjob.setCompanyLists(responseCompanies.getCompanyLists());
+        if (purposeAPIResponse != null) {
+            this.purposeAPIResponse.setPurposeList(purposeAPIResponse.getPurposeList());
             mAdapter.notifyDataSetChanged();
         }
 
@@ -171,14 +184,15 @@ public class FragmentCompanyList extends Fragment implements CompanyListView, On
         }
     }
 
-
     @Override
-    public void onCompanyItemSelected(ResponseCompanies responseCompanies, int position) {
-        EventBus.getDefault().postSticky(new MessageEvent(getResources().getString(R.string.company_selected)
-                + "," + responseCompanies.getCompanyLists().get(position).getCompanyName() +
-                "#" + responseCompanies.getCompanyLists().get(position).getCompanyID()));
+    public void OnPurposeItemClick(PurposeAPIResponse purposeAPIResponse, int position) {
+
+        EventBus.getDefault().postSticky(new MessageEvent(getResources().getString(R.string.purpose_selected)
+                + "," + purposeAPIResponse.getPurposeList().get(position).getPurposeName() +
+                "#" + purposeAPIResponse.getPurposeList().get(position).getPurposeID()));
 
         ((HomeActivity) getActivity()).visitorPresenter.oneStepBack();
     }
+
 }
 

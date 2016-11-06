@@ -189,7 +189,6 @@
                         android:hint="Company Name*"
                         android:imeOptions="actionNext"
                         android:inputType="text"
-                        android:text=""
                         android:textColor="@color/black_color"
                         android:textSize="@dimen/text_14sp" />
 
@@ -245,6 +244,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@string/fontFamily__roboto_condensed"
                         android:hint="Purpose of Visit*"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
                         android:imeOptions="actionNext"
                         android:inputType="text"
                         android:textColor="@color/black_color"

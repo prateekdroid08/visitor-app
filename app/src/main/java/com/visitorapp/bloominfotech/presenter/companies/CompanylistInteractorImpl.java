@@ -14,8 +14,8 @@ import retrofit2.Response;
 public class CompanylistInteractorImpl implements CompanyListinteractor {
     @Override
     public void getCompanyListAPI(String companyID, int page, boolean getAll, final CompanylistListener companylistListener) {
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
         Call<ResponseCompanies> call = apiService.getComapnyAPI(companyID, page, getAll);
         call.enqueue(new Callback<ResponseCompanies>() {

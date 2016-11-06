@@ -3,6 +3,7 @@ package com.visitorapp.bloominfotech.views.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +12,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.visitorapp.bloominfotech.R;
-import com.visitorapp.bloominfotech.constants.Constants;
 import com.visitorapp.bloominfotech.models.eventbus.MessageEvent;
 import com.visitorapp.bloominfotech.views.activity.HomeActivity;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by hp on 10/19/2016.
@@ -37,45 +35,42 @@ public class FragmentVisitorForm extends Fragment {
 
 
     @Bind(R.id.ll_add_member_container)
-    public LinearLayout mLLContainer;
+    LinearLayout mLLContainer;
 
 
     @Bind(R.id.tv_add_member)
-    public TextView mAddMember;
+    TextView mAddMember;
 
 
     @Bind(R.id.visitor_email)
-    public EditText visitor_email;
+    EditText visitor_email;
 
     @Bind(R.id.visitor_first_name)
-    public EditText visitor_first_name;
+    EditText visitor_first_name;
 
     @Bind(R.id.visitor_Last_name)
-    public EditText visitor_Last_name;
+    EditText visitor_Last_name;
 
     @Bind(R.id.visitor_company_name)
-    public EditText mVisitor_company_name;
+    EditText mVisitor_company_name;
 
     @Bind(R.id.phone_number)
-    public EditText phone_number;
-
+    EditText phone_number;
 
     @Bind(R.id.car_registration)
-    public EditText car_registration;
-
+    EditText car_registration;
 
     @Bind(R.id.purpose_of_visit)
-    public EditText purpose_of_visit;
-
+    EditText purposeOfVisit;
 
     @Bind(R.id.meeting_with)
-    public EditText meeting_with;
+    EditText meeting_with;
 
     @Bind(R.id.visitor_add_members)
-    public EditText visitor_add_members;
+    EditText visitor_add_members;
 
     @Bind(R.id.submit)
-    public TextView submit;
+    TextView submit;
 
     boolean addmembercontainer = false;
 
@@ -83,13 +78,12 @@ public class FragmentVisitorForm extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_visitor_form, container, false);
- /*init butterknife*/
+        /*init butterknife*/
         ButterKnife.bind(this, view);
 
         ((HomeActivity) getActivity()).toolbar.setVisibility(View.GONE);
         ((HomeActivity) getActivity()).mToolbarTitle.setText("Visitor Form");
 
-        mVisitor_company_name.setText(Constants.DEFAULT_COMPANY_NAME);
         return view;
     }
 
@@ -108,21 +102,28 @@ public class FragmentVisitorForm extends Fragment {
     }
 
     @OnClick(R.id.visitor_company_name)
-    public void methodAddcompany(View view) {
-
-
+    void methodAddcompany(View view) {
         ((HomeActivity) getActivity()).visitorPresenter.navigateTo(FragmentCompanyList.newInstance());
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mVisitor_company_name.setText(Constants.DEFAULT_COMPANY_NAME+"");
+    @OnClick(R.id.purpose_of_visit)
+    void methodAddPurpose() {
+        ((HomeActivity) getActivity()).visitorPresenter.navigateTo(FragmentPurposeList.newInstance());
+    }
+
+    @OnClick(R.id.meeting_with)
+    void methodAddMeeting() {
+        ((HomeActivity) getActivity()).visitorPresenter.navigateTo(FragmentMeetingList.newInstance());
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
+
         ButterKnife.unbind(this);
     }
 
@@ -130,32 +131,28 @@ public class FragmentVisitorForm extends Fragment {
     public void onStart() {
         super.onStart();
 
-
         if (!EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().register(this);
+            EventBus.getDefault().registerSticky(this);
         }
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().unregister(this);
-        }
-    }
-
-    @Subscribe
     public void onEventMainThread(MessageEvent event) {
 
-
-        EventBus.getDefault().removeStickyEvent(event.message);
-        if (event.message.equalsIgnoreCase("companyselected")) {
-            mVisitor_company_name.setText(Constants.DEFAULT_COMPANY_NAME+"");
+        if (event.message.contains(getResources().getString(R.string.company_selected))) {
+            EventBus.getDefault().removeStickyEvent(event);
+            String[] companyInfo = event.message.split(",");
+            String[] companyNameId = companyInfo[1].split("-");
+            if (mVisitor_company_name != null)
+                mVisitor_company_name.setText(companyNameId[0]);
+        } else if (event.message.contains(getResources().getString(R.string.purpose_selected))) {
+            EventBus.getDefault().removeStickyEvent(event);
+            String[] purposeInfo = event.message.split(",");
+            String[] purposeNameId = purposeInfo[1].split("#");
+            if (purposeOfVisit != null)
+                purposeOfVisit.setText(purposeNameId[0]);
         }
 
-
     }
-
 
 }
 
