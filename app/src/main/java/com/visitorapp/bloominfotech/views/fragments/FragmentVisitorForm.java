@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.visitorapp.bloominfotech.R;
 import com.visitorapp.bloominfotech.models.PostResponse;
 import com.visitorapp.bloominfotech.models.eventbus.MessageEvent;
+import com.visitorapp.bloominfotech.models.form_response.ResponseVisitorForm;
 import com.visitorapp.bloominfotech.presenter.visitor_form.VisitorPresenter;
 import com.visitorapp.bloominfotech.presenter.visitor_form.VisitorPresenterImpl;
 import com.visitorapp.bloominfotech.presenter.visitor_form.VisitorView;
@@ -181,7 +182,10 @@ public class FragmentVisitorForm extends Fragment implements VisitorView {
 
     @Override
     public void onSuccess(PostResponse postResponse) {
-        ViewUtils.showMessage(getActivity(), postResponse.getMessage());
+       /* if (postResponse != null) {
+            ViewUtils.showMessage(getActivity(), postResponse.getMessage());
+        }*/
+        ((HomeActivity) getActivity()).visitorPresenter.navigateTo(FragmentFinalReceipt.newInstance());
     }
 
     @Override
@@ -263,7 +267,8 @@ public class FragmentVisitorForm extends Fragment implements VisitorView {
         hashMap.put("Phone", phone_number.getText().toString());
         hashMap.put("PurposeName", meeting_with.getText().toString());
         hashMap.put("MeetingID", meetingId);
-
+        hashMap.put("isPostBack", true);
+        hashMap.put("CarNumber", "");
         visitorPresenter.submitVisitorForm(hashMap);
 
     }

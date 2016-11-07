@@ -28,9 +28,9 @@ public class FragmentFilter extends Fragment implements DateTimePicker.OnDateTim
     View view;
 
 
-    public static FragmentReceipt newInstance() {
-        FragmentReceipt fragmentReceipt = new FragmentReceipt();
-        return fragmentReceipt;
+    public static FragmentFilter newInstance() {
+        FragmentFilter fragmentFilter = new FragmentFilter();
+        return fragmentFilter;
     }
 
     @Bind(R.id.dateFrom)

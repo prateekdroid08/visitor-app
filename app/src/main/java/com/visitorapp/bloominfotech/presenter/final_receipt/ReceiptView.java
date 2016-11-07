@@ -1,13 +1,15 @@
-package com.visitorapp.bloominfotech.presenter.visitor_form;
+package com.visitorapp.bloominfotech.presenter.final_receipt;
 
 import com.visitorapp.bloominfotech.models.PostResponse;
 import com.visitorapp.bloominfotech.models.form_response.ResponseVisitorForm;
 
 /**
- * Created by hp on 10/24/2016.
+ * Created by hp on 11/7/2016.
  */
-public interface VisitorView {
-    void onSuccess(PostResponse postResponse);
+
+public interface ReceiptView {
+
+    void onSuccess(ResponseVisitorForm responseVisitorForm);
 
     void onError(String message);
 

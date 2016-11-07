@@ -242,11 +242,11 @@
                         android:id="@+id/purpose_of_visit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@string/fontFamily__roboto_condensed"
-                        android:hint="Purpose of Visit*"
                         android:clickable="false"
                         android:cursorVisible="false"
                         android:focusable="false"
+                        android:fontFamily="@string/fontFamily__roboto_condensed"
+                        android:hint="Purpose of Visit*"
                         android:imeOptions="actionNext"
                         android:inputType="text"
                         android:textColor="@color/black_color"
@@ -300,7 +300,7 @@
                     android:layout_marginTop="@dimen/margin_20dp"
                     android:fontFamily="@string/fontFamily__roboto_condensed"
                     android:padding="@dimen/padding_10dp"
-                    android:text="You must ensure uou have logged back out when exiting the premise"
+                    android:text="You must ensure you have logged back out when exiting the premise"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_18sp" />
 
