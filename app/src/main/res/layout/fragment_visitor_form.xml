@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v4.widget.NestedScrollView
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white_color"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="top|center"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="48dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_app_logo" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:fontFamily="@string/fontFamily__roboto_condensed"
+                    android:padding="@dimen/padding_10dp"
+                    android:text="Visitor Form"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/text_18sp" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_5dp">
+
+                    <EditText
+                        android:id="@+id/visitor_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@string/fontFamily__roboto_condensed"
+                        android:hint="Email Address*"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/black_color"
+                        android:textSize="@dimen/text_14sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_5dp">
+
+                    <EditText
+                        android:id="@+id/visitor_first_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@string/fontFamily__roboto_condensed"
+                        android:hint="First Name*"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textColor="@color/black_color"
+                        android:textSize="@dimen/text_14sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_5dp">
+
+                    <EditText
+                        android:id="@+id/visitor_Last_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@string/fontFamily__roboto_condensed"
+                        android:hint="Last Name"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textColor="@color/black_color"
+                        android:textSize="@dimen/text_14sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_add_member"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_40dp"
+                    android:layout_marginRight="@dimen/margin_40dp"
+                    android:layout_marginTop="@dimen/margin_5dp"
+                    android:background="@drawable/button_selector"
+                    android:drawableLeft="@drawable/ic_action_arrow_left"
+                    android:gravity="center"
+                    android:text="Add Members"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/white_color"
+                    android:textSize="@dimen/text_18sp" />
+
+
+                <LinearLayout
+                    android:id="@+id/ll_add_member_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_5dp"
+                        android:fontFamily="@string/fontFamily__roboto_condensed"
+                        android:gravity="left"
+                        android:padding="@dimen/padding_10dp"
+                        android:text="@string/please_write_the_full_name_of_all_the_members_seperate_names_by_comma"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_18sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_5dp"
+                        android:fontFamily="@string/fontFamily__roboto_condensed"
+                        android:gravity="left"
+                        android:padding="@dimen/padding_10dp"
+                        android:text="Members Name"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/black_color"
+                        android:textSize="@dimen/text_18sp" />
+
+                    <EditText
+                        android:id="@+id/visitor_add_members"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:background="@drawable/custom_button_background"
+                        android:fontFamily="@string/fontFamily__roboto_condensed"
+                        android:gravity="left|top"
+                        android:hint="Members Full Name"
+                        android:inputType="textMultiLine"
+                        android:maxLines="3"
+                        android:minLines="3"
+                        android:padding="@dimen/padding_10dp"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/black_color"
+                        android:textColorHint="@color/hintcolor" />
+                </LinearLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10dp">
+
+                    <EditText
+                        android:id="@+id/visitor_company_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:fontFamily="@string/fontFamily__roboto_condensed"
+                        android:hint="Company Name*"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textColor="@color/black_color"
+                        android:textSize="@dimen/text_14sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_5dp">
+
+                    <EditText
+                        android:id="@+id/phone_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@string/fontFamily__roboto_condensed"
+                        android:hint="Phone Number*"
+                        android:imeOptions="actionNext"
+                        android:inputType="phone"
+                        android:textColor="@color/black_color"
+                        android:textSize="@dimen/text_14sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_5dp">
+
+                    <EditText
+                        android:id="@+id/car_registration"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@string/fontFamily__roboto_condensed"
+                        android:hint="Car Registration Number"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textColor="@color/black_color"
+                        android:textSize="@dimen/text_14sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_5dp">
+
+                    <EditText
+                        android:id="@+id/purpose_of_visit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@string/fontFamily__roboto_condensed"
+                        android:hint="Purpose of Visit*"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textColor="@color/black_color"
+                        android:textSize="@dimen/text_14sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_5dp">
+
+                    <EditText
+                        android:id="@+id/meeting_with"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:fontFamily="@string/fontFamily__roboto_condensed"
+                        android:hint="Meeting with*"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textColor="@color/black_color"
+                        android:textSize="@dimen/text_14sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <TextView
+                    android:id="@+id/submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_40dp"
+                    android:layout_marginRight="@dimen/margin_40dp"
+                    android:layout_marginTop="@dimen/margin_5dp"
+                    android:background="@drawable/button_selector"
+                    android:gravity="center"
+                    android:text="Submit"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/white_color"
+                    android:textSize="@dimen/text_18sp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_40dp"
+                    android:layout_marginTop="@dimen/margin_20dp"
+                    android:fontFamily="@string/fontFamily__roboto_condensed"
+                    android:padding="@dimen/padding_10dp"
+                    android:text="You must ensure uou have logged back out when exiting the premise"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_18sp" />
+
+
+            </LinearLayout>
+
+
+        </android.support.v4.widget.NestedScrollView>
+
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
