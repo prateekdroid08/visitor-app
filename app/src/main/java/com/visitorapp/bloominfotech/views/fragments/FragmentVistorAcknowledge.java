@@ -50,7 +50,7 @@ public class FragmentVistorAcknowledge extends Fragment {
     @OnClick(R.id.agree_acknowledge_visitor)
     public void methodVisitorAcknowledge(View view) {
 
-        ((HomeActivity) getActivity()).visitorPresenter.navigateTo(FragmentVisitorForm.newInstance());
+        ((HomeActivity) getActivity()).visitorPresenter.navigateTo(FragmentFinalReceipt.newInstance());
     }
 
     @Override
