@@ -53,15 +53,15 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/padding_10dp"
-android:layout_marginTop="@dimen/margin_15dp"
+                    android:layout_marginTop="@dimen/margin_15dp"
                     android:background="@drawable/custom_button_background"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding_10dp">
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_marginTop="@dimen/margin_20dp"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_20dp">
 
                         <EditText
 
@@ -71,7 +71,7 @@ android:layout_marginTop="@dimen/margin_15dp"
                             android:hint="Admin ID"
                             android:imeOptions="actionNext"
                             android:inputType="textEmailAddress"
-                            android:textColor="@color/white_color"
+                            android:textColor="@color/black_color"
                             android:textSize="@dimen/text_14sp" />
 
                     </android.support.design.widget.TextInputLayout>
@@ -79,19 +79,20 @@ android:layout_marginTop="@dimen/margin_15dp"
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/padding_20dp"
-                        android:paddingBottom="@dimen/padding_20dp"
-                        android:layout_height="wrap_content">
+                        android:paddingBottom="@dimen/padding_20dp">
 
                         <EditText
 
+                            android:id="@+id/editText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@string/fontFamily__roboto_condensed"
                             android:hint="Password"
                             android:imeOptions="actionNext"
                             android:inputType="textEmailAddress"
-                            android:textColor="@color/white_color"
+                            android:textColor="@color/black_color"
                             android:textSize="@dimen/text_14sp" />
 
                     </android.support.design.widget.TextInputLayout>
@@ -112,11 +113,7 @@ android:layout_marginTop="@dimen/margin_15dp"
                         android:textSize="@dimen/text_18sp" />
 
 
-
-
                 </LinearLayout>
-
-
 
 
             </LinearLayout>

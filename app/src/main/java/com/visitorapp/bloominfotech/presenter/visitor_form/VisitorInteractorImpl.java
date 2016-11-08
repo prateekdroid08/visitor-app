@@ -1,6 +1,7 @@
 package com.visitorapp.bloominfotech.presenter.visitor_form;
 
 import com.visitorapp.bloominfotech.models.PostResponse;
+import com.visitorapp.bloominfotech.models.form_response.ResponseVisitorForm;
 import com.visitorapp.bloominfotech.models.meeting.MeetingResponse;
 import com.visitorapp.bloominfotech.web_api.ApiClient;
 import com.visitorapp.bloominfotech.web_api.ApiInterface;

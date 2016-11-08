@@ -3,6 +3,7 @@ package com.visitorapp.bloominfotech.presenter.visitor_form;
 import android.content.Context;
 
 import com.visitorapp.bloominfotech.models.PostResponse;
+import com.visitorapp.bloominfotech.models.form_response.ResponseVisitorForm;
 
 import java.util.HashMap;
 
