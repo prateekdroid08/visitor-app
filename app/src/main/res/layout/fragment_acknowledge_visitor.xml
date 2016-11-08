@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@drawable/card_like_background"
+        android:elevation="@dimen/elevation_6dp"
+        android:orientation="vertical">
+
+        <android.support.v4.widget.NestedScrollView
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white_color"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|top"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_5dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:fontFamily="@string/fontFamily__roboto_condensed"
+                    android:paddingBottom="@dimen/padding_10dp"
+                    android:paddingTop="@dimen/padding_10dp"
+                    android:text="Visitor"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black_color"
+                    android:textSize="@dimen/text_20sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/colorPrimary"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:fontFamily="@string/fontFamily__roboto_condensed"
+                    android:paddingBottom="@dimen/padding_10dp"
+                    android:paddingTop="@dimen/padding_10dp"
+                    android:text="PLEASE DO NOT TOUCH ANYTHING"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_20sp" />
+
+                <TextView
+                    android:id="@+id/text_visitor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:fontFamily="@string/fontFamily__roboto_condensed"
+                    android:gravity="left"
+                    android:text="@string/visitor_guideline"
+                    android:textAlignment="gravity"
+                    android:textSize="@dimen/text_16sp" />
+
+
+                <TextView
+                    android:id="@+id/agree_acknowledge_visitor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_25dp"
+                    android:layout_marginRight="@dimen/margin_25dp"
+                    android:layout_marginTop="@dimen/margin_20dp"
+                    android:background="@drawable/custom_button_background"
+                    android:fontFamily="@string/fontFamily__roboto_condensed"
+                    android:gravity="center"
+                    android:padding="@dimen/padding_20dp"
+                    android:layout_marginBottom="@dimen/margin_40dp"
+
+                    android:text="Acknowledge and Continue"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_20sp" />
+
+
+            </LinearLayout>
+
+
+        </android.support.v4.widget.NestedScrollView>
+
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
