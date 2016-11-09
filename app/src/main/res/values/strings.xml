@@ -49,4 +49,10 @@
     <string name="purpose_selected">purposeselected</string>
     <string name="meeting_selected">meetingselected</string>
 
+
+    <string name="ok">OK</string>
+    <string name="permissions_not_granted">Permissions were not granted.</string>
+    <string name="permission_file_rationale">permission is needed to  Save preview.</string>
+    <string name="permision_available_file">Permission has been granted. Preview can now be Save.</string>
+
 </resources>

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.visitorapp.bloominfotech.R;
@@ -72,7 +73,8 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
 
 
 
-
+        @Bind(R.id.ll_conatiner)
+        LinearLayout mllContainer;
 
         public MyViewHolder(View view) {
             super(view);
@@ -120,7 +122,7 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
         contactViewHolder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onReceiptItemClickListener.onReceiptViewItemSelected(rowItems, position);
+                onReceiptItemClickListener.onReceiptViewItemSelected(rowItems, position,contactViewHolder.mllContainer);
             }
         });
 
