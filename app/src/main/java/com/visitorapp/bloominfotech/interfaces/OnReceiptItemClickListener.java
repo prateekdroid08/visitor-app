@@ -1,5 +1,8 @@
 package com.visitorapp.bloominfotech.interfaces;
 
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import com.visitorapp.bloominfotech.models.FinalReceiptModel;
 import com.visitorapp.bloominfotech.models.companies.ResponseCompanies;
 import com.visitorapp.bloominfotech.models.form_response.ResponseVisitorForm;
@@ -12,5 +15,5 @@ import java.util.ArrayList;
 
 public interface OnReceiptItemClickListener {
 
-    void onReceiptViewItemSelected(ArrayList<FinalReceiptModel> rowItems, int position);
+    void onReceiptViewItemSelected(ArrayList<FinalReceiptModel> rowItems, int position, LinearLayout tv);
 }
