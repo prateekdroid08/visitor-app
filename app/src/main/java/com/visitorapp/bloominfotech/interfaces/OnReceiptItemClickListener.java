@@ -15,5 +15,5 @@ import java.util.ArrayList;
 
 public interface OnReceiptItemClickListener {
 
-    void onReceiptViewItemSelected(ArrayList<FinalReceiptModel> rowItems, int position, LinearLayout tv);
+    void onReceiptViewItemSelected(ArrayList<FinalReceiptModel> rowItems, int position, LinearLayout ll,TextView tv,LinearLayout subconatiner);
 }

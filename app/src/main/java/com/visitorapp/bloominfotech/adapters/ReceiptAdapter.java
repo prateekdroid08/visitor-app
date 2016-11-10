@@ -72,9 +72,13 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
         ImageView mImage;
 
 
-
         @Bind(R.id.ll_conatiner)
         LinearLayout mllContainer;
+
+
+        @Bind(R.id.ll_subContainer)
+        LinearLayout mllSubContainer;
+
 
         public MyViewHolder(View view) {
             super(view);
@@ -115,14 +119,14 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
 
         if (rowItems.get(position).getImagelink() != null) {
             Glide.with(mContext).load(rowItems.get(position).getImagelink()).diskCacheStrategy(DiskCacheStrategy.RESULT)
-                    .skipMemoryCache(false).dontAnimate().into(contactViewHolder.mImage);
+                    .skipMemoryCache(false).dontAnimate().placeholder(R.drawable.ic_app_logo).into(contactViewHolder.mImage);
         }
 
 
         contactViewHolder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onReceiptItemClickListener.onReceiptViewItemSelected(rowItems, position,contactViewHolder.mllContainer);
+                onReceiptItemClickListener.onReceiptViewItemSelected(rowItems, position, contactViewHolder.mllContainer, contactViewHolder.mView, contactViewHolder.mllSubContainer);
             }
         });
 
