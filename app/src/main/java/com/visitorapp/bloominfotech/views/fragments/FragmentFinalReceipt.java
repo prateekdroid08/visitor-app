@@ -113,7 +113,9 @@ public class FragmentFinalReceipt extends Fragment implements ReceiptView, OnRec
     static Image image;
     static byte[] bArray;
 
-    LinearLayout tvView;
+    LinearLayout llView;
+    LinearLayout llSubView;
+    TextView txtView;
 
 
     public static FragmentFinalReceipt newInstance() {
@@ -260,9 +262,10 @@ public class FragmentFinalReceipt extends Fragment implements ReceiptView, OnRec
     }
 
     @Override
-    public void onReceiptViewItemSelected(ArrayList<FinalReceiptModel> rowItems, int position, LinearLayout txt) {
-        tvView = txt;
-
+    public void onReceiptViewItemSelected(ArrayList<FinalReceiptModel> rowItems, int position, LinearLayout ll, TextView tv, LinearLayout SubView) {
+        llView = ll;
+        txtView = tv;
+        llSubView = SubView;
         getpermissionFILERequired();
     }
 
@@ -342,12 +345,17 @@ public class FragmentFinalReceipt extends Fragment implements ReceiptView, OnRec
     }
 
     private void SaveImageToPhone() {
+/*hide view pdf button*/
+        txtView.setVisibility(View.GONE);
+        llSubView.setBackgroundResource(R.drawable.card_like_background);
 
-        mCoordinate.setDrawingCacheEnabled(true);
-        Bitmap screen = getBitmapFromView(tvView);
+        llView.setDrawingCacheEnabled(true);
+        Bitmap screen = getBitmapFromView(llView);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         screen.compress(Bitmap.CompressFormat.PNG, 80, stream);
         bArray = stream.toByteArray();
+
+        llView.setDrawingCacheEnabled(false);
 
         try {
             Document document = new Document();
@@ -360,7 +368,8 @@ public class FragmentFinalReceipt extends Fragment implements ReceiptView, OnRec
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        txtView.setVisibility(View.VISIBLE);
+        llSubView.setBackgroundResource(R.drawable.custom_receipt_background);
         File fileuri = new File(FILE);
         if (fileuri != null) {
             sentFileForPrint(fileuri);
@@ -417,6 +426,8 @@ public class FragmentFinalReceipt extends Fragment implements ReceiptView, OnRec
         else
             //does not have background drawable, then draw white background on the canvas
             canvas.drawColor(Color.WHITE);
+
+
         // draw the view on the canvas
         view.draw(canvas);
         //return the bitmap
