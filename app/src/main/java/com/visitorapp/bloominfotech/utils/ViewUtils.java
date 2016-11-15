@@ -23,8 +23,12 @@ import java.lang.ref.WeakReference;
 public class ViewUtils {
 
     public static void showMessage(Context context, String message) {
-        WeakReference<Context> contextWeakReference = new WeakReference<Context>(context);
-        Toast.makeText(contextWeakReference.get(), message, Toast.LENGTH_SHORT).show();
+        try {
+            WeakReference<Context> contextWeakReference = new WeakReference<Context>(context);
+            Toast.makeText(contextWeakReference.get(), message, Toast.LENGTH_SHORT).show();
+        }catch(Exception e){
+
+        }
     }
 
 

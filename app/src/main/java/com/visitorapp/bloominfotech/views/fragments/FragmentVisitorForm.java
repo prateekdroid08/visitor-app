@@ -267,7 +267,7 @@ public class FragmentVisitorForm extends Fragment implements VisitorView {
         hashMap.put("Phone", phone_number.getText().toString());
         hashMap.put("PurposeName", meeting_with.getText().toString());
         hashMap.put("MeetingID", meetingId);
-        hashMap.put("isPostBack", true);
+        hashMap.put("isPostBack", "True");
         hashMap.put("CarNumber", "");
         visitorPresenter.submitVisitorForm(hashMap);
 
