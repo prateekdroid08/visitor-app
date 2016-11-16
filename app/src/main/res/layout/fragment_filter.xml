@@ -136,7 +136,7 @@ android:id="@+id/dateFrom"
                         android:textSize="@dimen/text_18sp" />
 
                     <EditText
-
+android:id="@+id/company_filter"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/custom_button_background"
@@ -170,7 +170,7 @@ android:id="@+id/dateFrom"
                         android:textSize="@dimen/text_18sp" />
 
                     <EditText
-
+android:id="@+id/meeting_filter"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/custom_button_background"
@@ -192,7 +192,7 @@ android:id="@+id/dateFrom"
 
 
                     <TextView
-                        android:id="@+id/tv_add_member"
+                        android:id="@+id/FilterSave"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/margin_25dp"

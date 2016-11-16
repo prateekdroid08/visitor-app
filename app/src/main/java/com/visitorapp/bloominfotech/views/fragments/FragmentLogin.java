@@ -68,7 +68,9 @@ public class FragmentLogin extends Fragment {
 
         r  = new Runnable() {
             public void run() {
+                if(system_time!=null)
                 system_time.setText("Time : "+new SimpleDateFormat("HH:mm:ss", Locale.US).format(new Date()));
+
                 someHandler.postDelayed(this, 1000);
             }
         };

@@ -13,6 +13,7 @@ import com.visitorapp.bloominfotech.R;
 import com.visitorapp.bloominfotech.utils.datetimepicker.DateTime;
 import com.visitorapp.bloominfotech.utils.datetimepicker.DateTimePicker;
 import com.visitorapp.bloominfotech.utils.datetimepicker.SimpleDateTimePicker;
+import com.visitorapp.bloominfotech.views.activity.HomeActivity;
 
 import java.util.Date;
 
@@ -58,6 +59,16 @@ public class FragmentFilter extends Fragment implements DateTimePicker.OnDateTim
         ButterKnife.unbind(this);
     }
 
+    @OnClick(R.id.meeting_filter)
+    void methodAddcompanyFilter(View view) {
+        ((HomeActivity) getActivity()).visitorPresenter.navigateTo(FragmentCompanyList.newInstance());
+    }
+
+    @OnClick(R.id.meeting_with)
+    void methodAddMeetingFilter() {
+        ((HomeActivity) getActivity()).visitorPresenter.navigateTo(FragmentMeetingList.newInstance());
+    }
+
     @OnClick(R.id.dateFrom)
     public void methodDateFrom(View view) {
         datepickerSelector = "dateFrom";
@@ -93,6 +104,15 @@ public class FragmentFilter extends Fragment implements DateTimePicker.OnDateTim
         } else if (datepickerSelector.equalsIgnoreCase("dateTo")) {
             mDateTo.setText(mDateTime.getDateString());
         }
+    }
+
+
+    @OnClick(R.id.FilterSave)
+    public void methodFilterSave(View view) {
+
+
+        ((HomeActivity) getActivity()).visitorPresenter.oneStepBack();
+
     }
 }
 

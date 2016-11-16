@@ -124,6 +124,7 @@ public class FragmentFinalReceipt extends Fragment implements ReceiptView, OnRec
     }
 
     ReceiptAdapter mAdapter;
+    String message = "";
 
     @Nullable
     @Override
@@ -137,6 +138,16 @@ public class FragmentFinalReceipt extends Fragment implements ReceiptView, OnRec
         receiptPresenter = new ReceiptPresenterImpl(getActivity(), this);
    /*recycler view properties*/
         mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+
+
+        Bundle bundle = this.getArguments();
+
+        if (bundle != null) {
+            message = bundle.getString("message", "");
+
+        }
+
+
         recyclerView.setLayoutManager(mLayoutManager);
         // 3. set item animator to DefaultAnimator
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -169,7 +180,7 @@ public class FragmentFinalReceipt extends Fragment implements ReceiptView, OnRec
 
     private void getvalueFromserver() {
 
-        receiptPresenter.getFinalreceipt("117201633131");
+        receiptPresenter.getFinalreceipt(message);
     }
 
 

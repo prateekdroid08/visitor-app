@@ -7,9 +7,15 @@
     android:background="@color/white_color"
     android:fitsSystemWindows="true">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
 
     <FrameLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_weight="01"
         android:layout_height="wrap_content">
 
         <android.support.v4.widget.SwipeRefreshLayout
@@ -53,4 +59,18 @@
 
 
     </FrameLayout>
+
+        <TextView
+            android:id="@+id/btn_Filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:background="@drawable/button_background_add_more"
+            android:gravity="center"
+            android:text="Filter"
+            android:textAlignment="gravity"
+            android:textColor="@color/white_color"
+            android:textSize="@dimen/text_18sp" />
+    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
