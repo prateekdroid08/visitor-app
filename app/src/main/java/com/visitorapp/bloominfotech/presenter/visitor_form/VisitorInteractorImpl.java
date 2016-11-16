@@ -18,10 +18,10 @@ import retrofit2.Response;
 public class VisitorInteractorImpl implements VisitorInteractor {
 
     @Override
-    public void submitVisitorForm(HashMap hashMap, final OnVisitorListener onVisitorListener) {
+    public void submitVisitorForm(String EmailAddress, String FirstName, String LastName, String UserMembers, String CompanyName, String Phone, String PurposeName, String MeetingID, String isPostBack, String CarNumber, final OnVisitorListener onVisitorListener) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<PostResponse> call = apiService.postUserData(hashMap);
+        Call<PostResponse> call = apiService.postUserData(EmailAddress, FirstName, LastName, UserMembers, CompanyName, Phone, PurposeName, MeetingID, "True", CarNumber);
 
         call.enqueue(new Callback<PostResponse>() {
             @Override

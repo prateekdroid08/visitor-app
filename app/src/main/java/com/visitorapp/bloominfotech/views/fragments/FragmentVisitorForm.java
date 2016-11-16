@@ -258,18 +258,18 @@ public class FragmentVisitorForm extends Fragment implements VisitorView {
             return;
         }
 
-        HashMap hashMap = new HashMap();
-        hashMap.put("EmailAddress", visitor_email.getText().toString());
-        hashMap.put("FirstName", visitor_first_name.getText().toString());
-        hashMap.put("LastName", visitor_Last_name.getText().toString());
-        hashMap.put("UserMembers", visitor_add_members.getText().toString());
-        hashMap.put("CompanyName", mVisitor_company_name.getText().toString());
-        hashMap.put("Phone", phone_number.getText().toString());
-        hashMap.put("PurposeName", meeting_with.getText().toString());
-        hashMap.put("MeetingID", meetingId);
-        hashMap.put("isPostBack", "True");
-        hashMap.put("CarNumber", "");
-        visitorPresenter.submitVisitorForm(hashMap);
+
+        visitorPresenter.submitVisitorForm(
+                "True",
+                mVisitor_company_name.getText().toString(),
+                meetingId,
+                purposeOfVisit.getText().toString(),
+                visitor_email.getText().toString().trim(),
+                visitor_first_name.getText().toString(),
+                visitor_Last_name.getText().toString(),
+                car_registration.getText().toString(),
+                phone_number.getText().toString(),
+                visitor_add_members.getText().toString());
 
     }
 }

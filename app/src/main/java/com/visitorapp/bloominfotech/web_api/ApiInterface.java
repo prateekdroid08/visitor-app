@@ -18,7 +18,6 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
 
 /**
  * Created by Rivendell on 05/09/16.
@@ -32,14 +31,15 @@ public interface ApiInterface {
     @GET("PurposeVisitorAPI")
     Call<PurposeAPIResponse> getPurposeAPI(@Query("PurposeID") String purposeId);
 
-    @GET("UserAPI2")
+    @GET("UserAPI")
     Call<ResponseVisitorForm> getFinalReceiptAPI(@Query("uniqueKey") String uniqueKey);
 
     @GET("MeetingAPI")
     Call<MeetingResponse> getMeetingAPI(@Query("CompanyID") String companyID, @Query("page") int page, @Query("getAll") boolean getAll);
 
     @POST("UserAPI2")
-    Call<PostResponse> postUserData(@Body HashMap hashMap);
+    Call<PostResponse> postUserData(@Query("isPostBack") String EmailAddress, @Query("CompanyName") String FirstName, @Query("MeetingID") String LastName, @Query("PurposeName") String UserMembers, @Query("EmailAddress") String CompanyName, @Query("FirstName") String Phone, @Query("LastName") String PurposeName, @Query("CarNumber") String MeetingID, @Query("Phone") String isPostBack, @Query("UserMembers") String CarNumber);
+
 
 
 }

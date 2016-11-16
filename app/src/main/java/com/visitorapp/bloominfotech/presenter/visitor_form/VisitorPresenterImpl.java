@@ -23,9 +23,9 @@ public class VisitorPresenterImpl implements VisitorPresenter, OnVisitorListener
     }
 
     @Override
-    public void submitVisitorForm(HashMap hashMap) {
+    public void submitVisitorForm(String EmailAddress,String FirstName,String LastName,String UserMembers,  String CompanyName,  String Phone, String PurposeName,  String MeetingID,  String isPostBack, String CarNumber) {
         visitorView.showProgress();
-        visitorInteractor.submitVisitorForm(hashMap, this);
+        visitorInteractor.submitVisitorForm(EmailAddress,FirstName,LastName,UserMembers,CompanyName, Phone,PurposeName,MeetingID,isPostBack,CarNumber,this);
     }
 
     @Override
