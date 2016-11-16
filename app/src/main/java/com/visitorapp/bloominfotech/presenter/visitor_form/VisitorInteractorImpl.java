@@ -1,6 +1,7 @@
 package com.visitorapp.bloominfotech.presenter.visitor_form;
 
 import com.visitorapp.bloominfotech.models.PostResponse;
+import com.visitorapp.bloominfotech.models.ResponseVistorForm;
 import com.visitorapp.bloominfotech.models.form_response.ResponseVisitorForm;
 import com.visitorapp.bloominfotech.models.meeting.MeetingResponse;
 import com.visitorapp.bloominfotech.web_api.ApiClient;
@@ -21,16 +22,16 @@ public class VisitorInteractorImpl implements VisitorInteractor {
     public void submitVisitorForm(String EmailAddress, String FirstName, String LastName, String UserMembers, String CompanyName, String Phone, String PurposeName, String MeetingID, String isPostBack, String CarNumber, final OnVisitorListener onVisitorListener) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<PostResponse> call = apiService.postUserData(EmailAddress, FirstName, LastName, UserMembers, CompanyName, Phone, PurposeName, MeetingID, "True", CarNumber);
+        Call<ResponseVistorForm> call = apiService.postUserData(EmailAddress, FirstName, LastName, UserMembers, CompanyName, Phone, PurposeName, MeetingID, "True", CarNumber);
 
-        call.enqueue(new Callback<PostResponse>() {
+        call.enqueue(new Callback<ResponseVistorForm>() {
             @Override
-            public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
+            public void onResponse(Call<ResponseVistorForm> call, Response<ResponseVistorForm> response) {
                 onVisitorListener.onSuccess(response.body());
             }
 
             @Override
-            public void onFailure(Call<PostResponse> call, Throwable t) {
+            public void onFailure(Call<ResponseVistorForm> call, Throwable t) {
                 onVisitorListener.onError(t.toString());
             }
         });

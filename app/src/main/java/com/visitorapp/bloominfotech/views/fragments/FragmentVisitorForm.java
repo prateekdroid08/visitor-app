@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.visitorapp.bloominfotech.R;
 import com.visitorapp.bloominfotech.models.PostResponse;
+import com.visitorapp.bloominfotech.models.ResponseVistorForm;
 import com.visitorapp.bloominfotech.models.eventbus.MessageEvent;
 import com.visitorapp.bloominfotech.models.form_response.ResponseVisitorForm;
 import com.visitorapp.bloominfotech.presenter.visitor_form.VisitorPresenter;
@@ -181,11 +182,19 @@ public class FragmentVisitorForm extends Fragment implements VisitorView {
     }
 
     @Override
-    public void onSuccess(PostResponse postResponse) {
-       /* if (postResponse != null) {
-            ViewUtils.showMessage(getActivity(), postResponse.getMessage());
-        }*/
-        ((HomeActivity) getActivity()).visitorPresenter.navigateTo(FragmentFinalReceipt.newInstance());
+    public void onSuccess(ResponseVistorForm postResponse) {
+        if (postResponse != null) {
+        //    ViewUtils.showMessage(getActivity(), postResponse.getMessage());
+            if(postResponse.getStatus().equalsIgnoreCase("accepted")){
+                Bundle bundle = new Bundle();
+                bundle.putString("message", postResponse.getMessage());
+                ((HomeActivity) getActivity()).visitorPresenter.navigateWithBundle(FragmentFinalReceipt.newInstance(),bundle);
+            }else{
+                ViewUtils.showMessage(getActivity(), postResponse.getStatus() );
+            }
+
+        }
+
     }
 
     @Override

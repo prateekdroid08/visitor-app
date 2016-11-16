@@ -3,6 +3,7 @@ package com.visitorapp.bloominfotech.presenter.visitor_form;
 import android.content.Context;
 
 import com.visitorapp.bloominfotech.models.PostResponse;
+import com.visitorapp.bloominfotech.models.ResponseVistorForm;
 import com.visitorapp.bloominfotech.models.form_response.ResponseVisitorForm;
 
 import java.util.HashMap;
@@ -29,7 +30,7 @@ public class VisitorPresenterImpl implements VisitorPresenter, OnVisitorListener
     }
 
     @Override
-    public void onSuccess(PostResponse postResponse) {
+    public void onSuccess(ResponseVistorForm postResponse) {
         visitorView.hideProgress();
         visitorView.onSuccess(postResponse);
     }
