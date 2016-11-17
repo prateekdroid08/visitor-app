@@ -69,7 +69,7 @@
                         android:textSize="@dimen/text_18sp" />
 
                     <EditText
-android:id="@+id/dateFrom"
+                        android:id="@+id/dateFrom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/custom_button_background"
@@ -136,7 +136,7 @@ android:id="@+id/dateFrom"
                         android:textSize="@dimen/text_18sp" />
 
                     <EditText
-android:id="@+id/company_filter"
+                        android:id="@+id/company_filter"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/custom_button_background"
@@ -170,7 +170,7 @@ android:id="@+id/company_filter"
                         android:textSize="@dimen/text_18sp" />
 
                     <EditText
-android:id="@+id/meeting_filter"
+                        android:id="@+id/meeting_filter"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/custom_button_background"
@@ -202,7 +202,7 @@ android:id="@+id/meeting_filter"
                         android:background="@drawable/button_selector"
                         android:drawableLeft="@drawable/ic_action_arrow_left"
                         android:gravity="center"
-                        android:text="Add Members"
+                        android:text="@string/apply_filter"
                         android:textAlignment="gravity"
                         android:textColor="@color/white_color"
                         android:textSize="@dimen/text_18sp" />

@@ -100,7 +100,8 @@ public class FragmentAdminLogin extends Fragment implements AdminLoginView {
         if (responseAdminLogin != null) {
             if (responseAdminLogin.getIsUserValid() == true) {
                 ((HomeActivity) getActivity()).visitorPresenter.navigateTo(FragmentAdminDetails.newInstance());
-            }
+            } else
+                ViewUtils.showMessage(getActivity(), responseAdminLogin.getErrorIfAny());
         }
     }
 

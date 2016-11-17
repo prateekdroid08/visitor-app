@@ -161,6 +161,7 @@ public class FragmentVisitorForm extends Fragment implements VisitorView {
             if (mVisitor_company_name != null) {
                 mVisitor_company_name.setText(companyNameId[0]);
             }
+            EventBus.getDefault().removeStickyEvent(event);
         } else if (event.message.contains(getResources().getString(R.string.purpose_selected))) {
             EventBus.getDefault().removeStickyEvent(event);
             String[] purposeInfo = event.message.split(",");
@@ -168,6 +169,7 @@ public class FragmentVisitorForm extends Fragment implements VisitorView {
             if (purposeOfVisit != null) {
                 purposeOfVisit.setText(purposeNameId[0]);
             }
+            EventBus.getDefault().removeStickyEvent(event);
         } else if (event.message.contains(getResources().getString(R.string.meeting_selected))) {
             EventBus.getDefault().removeStickyEvent(event);
             String[] meetingInfo = event.message.split(",");
@@ -177,6 +179,7 @@ public class FragmentVisitorForm extends Fragment implements VisitorView {
             }
 
             meetingId = meetingNameId[1];
+            EventBus.getDefault().removeStickyEvent(event);
         }
 
     }
@@ -184,13 +187,13 @@ public class FragmentVisitorForm extends Fragment implements VisitorView {
     @Override
     public void onSuccess(ResponseVistorForm postResponse) {
         if (postResponse != null) {
-        //    ViewUtils.showMessage(getActivity(), postResponse.getMessage());
-            if(postResponse.getStatus().equalsIgnoreCase("accepted")){
+            //    ViewUtils.showMessage(getActivity(), postResponse.getMessage());
+            if (postResponse.getStatus().equalsIgnoreCase("accepted")) {
                 Bundle bundle = new Bundle();
                 bundle.putString("message", postResponse.getMessage());
-                ((HomeActivity) getActivity()).visitorPresenter.navigateWithBundle(FragmentFinalReceipt.newInstance(),bundle);
-            }else{
-                ViewUtils.showMessage(getActivity(), postResponse.getStatus() );
+                ((HomeActivity) getActivity()).visitorPresenter.navigateWithBundle(FragmentFinalReceipt.newInstance(), bundle);
+            } else {
+                ViewUtils.showMessage(getActivity(), postResponse.getStatus());
             }
 
         }
@@ -234,11 +237,6 @@ public class FragmentVisitorForm extends Fragment implements VisitorView {
 
         if (visitor_Last_name.getText().toString().length() <= 0) {
             ViewUtils.showMessage(getActivity(), "Please enter your last name.");
-            return;
-        }
-
-        if (visitor_add_members.getText().toString().length() <= 0) {
-            ViewUtils.showMessage(getActivity(), "Please add member name.");
             return;
         }
 

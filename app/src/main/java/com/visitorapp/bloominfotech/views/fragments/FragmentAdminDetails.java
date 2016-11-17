@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 import com.visitorapp.bloominfotech.R;
 import com.visitorapp.bloominfotech.adapters.AdminDetailAdapter;
-import com.visitorapp.bloominfotech.adapters.CompanyAdapter;
 import com.visitorapp.bloominfotech.constants.Constants;
 import com.visitorapp.bloominfotech.models.admin_detail.ResponseAdminDetail;
 import com.visitorapp.bloominfotech.models.admin_detail.UserList;

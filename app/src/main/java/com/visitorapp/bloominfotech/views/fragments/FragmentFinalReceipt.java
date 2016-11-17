@@ -216,7 +216,7 @@ public class FragmentFinalReceipt extends Fragment implements ReceiptView, OnRec
             String dateAsString = "";
             String timeAsString = "";
 
-            String ImageUrl = "http://www.extenalbloominfotechinc.com/UniqueKeys/" + uniqueKeylocation + ".jpg";
+            String ImageUrl = "http://www.externalbloominfotechinc.com/UniqueKeys/" + uniqueKeylocation + ".jpg";
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
             Date date = null;
             try {
@@ -236,12 +236,15 @@ public class FragmentFinalReceipt extends Fragment implements ReceiptView, OnRec
             rowItems.add(item);
 
 
-            String otherMembers = responseVisitorForm.getUserMembers();
-            List<String> items = Arrays.asList(otherMembers.split("\\s*,\\s*"));
+            if (!responseVisitorForm.getUserMembers().equalsIgnoreCase("")) {
+                String otherMembers = responseVisitorForm.getUserMembers();
+                List<String> items = Arrays.asList(otherMembers.split("\\s*,\\s*"));
 
-            for (int i = 0; i < items.size(); i++) {
-                item = new FinalReceiptModel(items.get(i), companuStr, purposestr, uniqueKey, dateAsString, timeAsString, ImageUrl);
-                rowItems.add(item);
+                for (int i = 0; i < items.size(); i++) {
+                    item = new FinalReceiptModel(items.get(i), companuStr, purposestr, uniqueKey, dateAsString, timeAsString, ImageUrl);
+                    rowItems.add(item);
+                }
+
             }
 
             System.out.println("size : " + rowItems.size());
