@@ -2,6 +2,7 @@ package com.visitorapp.bloominfotech.web_api;
 
 
 import com.visitorapp.bloominfotech.models.PostResponse;
+import com.visitorapp.bloominfotech.models.ResponseLogout;
 import com.visitorapp.bloominfotech.models.ResponseVistorForm;
 import com.visitorapp.bloominfotech.models.admin_detail.ResponseAdminDetail;
 import com.visitorapp.bloominfotech.models.admin_login.ResponseAdminLogin;
@@ -52,6 +53,7 @@ public interface ApiInterface {
     @GET("AdminAPI")
     Call<ResponseAdminDetail> getAdminDetail(@Query("sort") String sort, @Query("srchDate") String srchDate,@Query("srchDateTo") String srchDateTo, @Query("CompanyID") String CompanyID,@Query("MeetingID") String MeetingID, @Query("page") String page);
 
-
+    @GET("UserAPI")
+    Call<ResponseLogout> getlogoutAPI(@Query("uniqueKey") String uniqueKey, @Query("islogOutCommand") String islogOutCommand);
 
 }
