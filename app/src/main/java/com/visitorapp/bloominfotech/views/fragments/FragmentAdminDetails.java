@@ -18,9 +18,11 @@ import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 import com.visitorapp.bloominfotech.R;
 import com.visitorapp.bloominfotech.adapters.AdminDetailAdapter;
 import com.visitorapp.bloominfotech.constants.Constants;
+import com.visitorapp.bloominfotech.models.admin_detail.FilterData;
 import com.visitorapp.bloominfotech.models.admin_detail.ResponseAdminDetail;
 import com.visitorapp.bloominfotech.models.admin_detail.UserList;
 import com.visitorapp.bloominfotech.models.companies.ResponseCompanies;
+import com.visitorapp.bloominfotech.models.eventbus.MessageEvent;
 import com.visitorapp.bloominfotech.presenter.admin_detail.AdminDetailPresenter;
 import com.visitorapp.bloominfotech.presenter.admin_detail.AdminDetailPresenterImpl;
 import com.visitorapp.bloominfotech.presenter.admin_detail.AdminDetailView;
@@ -33,6 +35,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by hp on 11/16/2016.
@@ -79,6 +82,8 @@ public class FragmentAdminDetails extends Fragment implements AdminDetailView {
         view = inflater.inflate(R.layout.fragment_admin_detail, container, false);
  /*init butterknife*/
         ButterKnife.bind(this, view);
+
+        Constants.page = 0;
 
         adminDetailPresenter = new AdminDetailPresenterImpl(getActivity(), this);
 
@@ -166,12 +171,18 @@ public class FragmentAdminDetails extends Fragment implements AdminDetailView {
 
     private void getAdminDetails() {
 
-        adminDetailPresenter.getadminDetails(Constants.sort, Constants.srchDate, Constants.srchDateTo, Constants.CompanyID, Constants.MeetingID, String.valueOf(Constants.page));
+        adminDetailPresenter.getadminDetails(Constants.sort, filterData.getSrchDate(), filterData.getSrchDateTo()
+                , filterData.getCompanyID(), filterData.getMeetingID(), String.valueOf(Constants.page));
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
+
         ButterKnife.unbind(this);
     }
 
@@ -236,6 +247,28 @@ public class FragmentAdminDetails extends Fragment implements AdminDetailView {
     public void methodAdminFilter(View view) {
         ((HomeActivity) getActivity()).visitorPresenter.navigateTo(FragmentFilter.newInstance());
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().registerSticky(this);
+        }
+    }
+
+    FilterData filterData = new FilterData();
+
+    public void onEventMainThread(FilterData filterData) {
+        this.filterData = filterData;
+        Constants.page = 0;
+        if (lstjob.size() > 0) {
+            lstjob.clear();
+        }
+        adminDetailPresenter.getadminDetails(Constants.sort, filterData.getSrchDate(), filterData.getSrchDateTo(),
+                filterData.getCompanyID(), filterData.getMeetingID()
+                , String.valueOf(Constants.page));
     }
 }
 

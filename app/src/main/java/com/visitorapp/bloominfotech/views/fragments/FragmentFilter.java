@@ -10,12 +10,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.visitorapp.bloominfotech.R;
+import com.visitorapp.bloominfotech.models.admin_detail.FilterData;
 import com.visitorapp.bloominfotech.models.eventbus.MessageEvent;
 import com.visitorapp.bloominfotech.utils.datetimepicker.DateTime;
 import com.visitorapp.bloominfotech.utils.datetimepicker.DateTimePicker;
 import com.visitorapp.bloominfotech.utils.datetimepicker.SimpleDateTimePicker;
 import com.visitorapp.bloominfotech.views.activity.HomeActivity;
 
+import java.text.DateFormatSymbols;
 import java.util.Date;
 
 import butterknife.Bind;
@@ -49,6 +51,8 @@ public class FragmentFilter extends Fragment implements DateTimePicker.OnDateTim
     EditText meetingFilter;
 
     String datepickerSelector = "";
+
+    FilterData filterData = new FilterData();
 
     @Nullable
     @Override
@@ -113,9 +117,17 @@ public class FragmentFilter extends Fragment implements DateTimePicker.OnDateTim
     public void DateTimeSet(Date date) {
         DateTime mDateTime = new DateTime(date);
         if (datepickerSelector.equalsIgnoreCase("dateFrom")) {
-            mDateFrom.setText(mDateTime.getDateString());
+            mDateFrom.setText(mDateTime.getDayOfMonth() + " " +
+                    new DateFormatSymbols().getMonths()[mDateTime.getMonthOfYear()] + ", " + mDateTime.getYear());
+
+            filterData.setSrchDate(mDateTime.getDayOfMonth() + " " +
+                    new DateFormatSymbols().getMonths()[mDateTime.getMonthOfYear()] + ", " + mDateTime.getYear());
         } else if (datepickerSelector.equalsIgnoreCase("dateTo")) {
-            mDateTo.setText(mDateTime.getDateString());
+            mDateTo.setText(mDateTime.getDayOfMonth() + " " +
+                    new DateFormatSymbols().getMonths()[mDateTime.getMonthOfYear()] + ", " + mDateTime.getYear());
+
+            filterData.setSrchDateTo(mDateTime.getDayOfMonth() + " " +
+                    new DateFormatSymbols().getMonths()[mDateTime.getMonthOfYear()] + ", " + mDateTime.getYear());
         }
     }
 
@@ -123,6 +135,7 @@ public class FragmentFilter extends Fragment implements DateTimePicker.OnDateTim
     @OnClick(R.id.FilterSave)
     public void methodFilterSave(View view) {
 
+        EventBus.getDefault().postSticky(filterData);
 
         ((HomeActivity) getActivity()).visitorPresenter.oneStepBack();
 
@@ -150,12 +163,16 @@ public class FragmentFilter extends Fragment implements DateTimePicker.OnDateTim
 
             companyFilter.setText(companyNameId[0]);
 
+            filterData.setCompanyID(companyNameId[1]);
+
         } else if (event.message.contains(getResources().getString(R.string.meeting_selected))) {
             EventBus.getDefault().removeStickyEvent(event);
             String[] meetingInfo = event.message.split(",");
             String[] meetingNameId = meetingInfo[1].split("#");
 
             meetingId = meetingNameId[1];
+
+            filterData.setMeetingID(meetingId);
 
             meetingFilter.setText(meetingNameId[0]);
             EventBus.getDefault().removeStickyEvent(event);
