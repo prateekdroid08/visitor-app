@@ -48,7 +48,8 @@
     <string name="company_selected">companyselected</string>
     <string name="purpose_selected">purposeselected</string>
     <string name="meeting_selected">meetingselected</string>
-
+    <string name="datefrom_selected">datefromselected</string>
+    <string name="dateto_selected">datetoselected</string>
 
     <string name="ok">OK</string>
     <string name="permissions_not_granted">Permissions were not granted.</string>
