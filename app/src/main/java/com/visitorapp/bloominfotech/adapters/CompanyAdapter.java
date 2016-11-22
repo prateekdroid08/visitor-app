@@ -28,91 +28,70 @@ import butterknife.ButterKnife;
 /**
  * Created by hp on 10/25/2016.
  */
-public class CompanyAdapter extends ArrayAdapter<CompanyList> implements Filterable {
+public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.MyViewHolder> {
 
-    List<CompanyList> items;
-    List<CompanyList> itemsAll;
-    List<CompanyList> suggestions;
-    Context mContext;
+    ResponseCompanies lstEvt;
+    private Context mContext;
     OnCompanyItemClick onCompanyItemClick;
 
 
-
-    public CompanyAdapter(Context context, int resource, List<CompanyList> items,
-                          OnCompanyItemClick onCompanyItemClick) {
-        super(context, resource, items);
+    public CompanyAdapter(Context context, ResponseCompanies lstEvt, OnCompanyItemClick onCompanyItemClick) {
+        this.lstEvt = lstEvt;
         this.mContext = context;
-        this.items = items;
-        this.itemsAll = (ArrayList<CompanyList>) ((ArrayList<CompanyList>) items).clone();
-        this.suggestions = new ArrayList<>();
+
         this.onCompanyItemClick = onCompanyItemClick;
+
+    }
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+
+
+        @Nullable
+        @Bind(R.id.companyTV)
+        TextView mName;
+
+        @Nullable
+        @Bind(R.id.mainframe)
+        LinearLayout mMain_frame;
+
+
+        public MyViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+        }
     }
 
     @Override
-    public Filter getFilter() {
-        return myFilter;
+    public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.adapter_companies_item, viewGroup, false);
+
+        return new MyViewHolder(itemView);
     }
 
-    @NonNull
+
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public void onBindViewHolder(final MyViewHolder contactViewHolder, final int position) {
 
-        View view = convertView;
-        if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.adapter_companies_item, parent, false);
-        }
 
-        CompanyList companyList = itemsAll.get(position);
-        if (companyList != null) {
-            TextView companyTV = (TextView) view.findViewById(R.id.companyTV);
-            if (companyTV != null)
-                companyTV.setText(companyList.getCompanyName());
-        }
+        if (lstEvt.getCompanyLists().get(position).getCompanyName() != null)
+            contactViewHolder.mName.setText(lstEvt.getCompanyLists().get(position).getCompanyName());
 
-        return view;
+
+        contactViewHolder.mMain_frame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onCompanyItemClick.onCompanyItemSelected(lstEvt, position);
+            }
+        });
+
+
     }
 
 
-    Filter myFilter = new Filter() {
-
-        @Override
-        public String convertResultToString(Object resultValue) {
-            String str = ((CompanyList) (resultValue)).getCompanyName();
-            return str;
-        }
-
-        @SuppressWarnings("unchecked")
-        @Override
-        public void publishResults(CharSequence constraint, FilterResults results) {
-            ArrayList<CompanyList> filteredList = (ArrayList<CompanyList>) results.values;
-            if (results != null && results.count > 0) {
-                clear();
-                for (CompanyList c : filteredList) {
-                    add(c);
-                }
-                notifyDataSetChanged();
-            }
-        }
-
-        @Override
-        public FilterResults performFiltering(CharSequence constraint) {
-            if (constraint != null) {
-                suggestions.clear();
-                for (CompanyList customer : itemsAll) {
-                    if (customer.getCompanyName().toLowerCase().contains(constraint.toString().toLowerCase())) {
-                        suggestions.add(customer);
-                    }
-                }
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = suggestions;
-                filterResults.count = suggestions.size();
-                return filterResults;
-            } else {
-                return new FilterResults();
-            }
-        }
-    };
+    @Override
+    public int getItemCount() {
+        return lstEvt.getCompanyLists().size();
+    }
 
 
 }
