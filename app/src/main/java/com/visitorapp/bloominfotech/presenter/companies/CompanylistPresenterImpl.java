@@ -37,7 +37,6 @@ public class CompanylistPresenterImpl implements CompanylistPresenter, Companyli
     @Override
     public void getCompanyList(String companyID, int page, boolean getAll) {
         if (AppUtils.isNetworkConnected(context)) {
-            companyListView.showProgress();
             companyListinteractor.getCompanyListAPI(companyID, page, getAll, this);
         } else {
 

@@ -21,7 +21,6 @@ public class PurposePresenterImpl implements PurposePresenter, OnPurposeListener
 
     @Override
     public void getAllPurpose() {
-        purposeView.showProgress();
         purposeInteractor.getAllPurpose(this);
     }
 

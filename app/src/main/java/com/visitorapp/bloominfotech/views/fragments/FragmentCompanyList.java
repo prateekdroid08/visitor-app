@@ -86,8 +86,8 @@ public class FragmentCompanyList extends Fragment implements CompanyListView, On
 
         recyclerView.setHasFixedSize(true);
 /*setting adapter*/
-        mAdapter = new CompanyAdapter(getActivity(), lstjob, this);
-        recyclerView.setAdapter(mAdapter);
+//        mAdapter = new CompanyAdapter(getActivity(), lstjob, this);
+//        recyclerView.setAdapter(mAdapter);
 
 
         /*Swipe refresh layout*/

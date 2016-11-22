@@ -98,8 +98,8 @@ public class FragmentPurposeList extends Fragment implements PurposeView, OnPurp
         recyclerView.setHasFixedSize(true);
 
         /*setting adapter*/
-        mAdapter = new PurposeAdapter(getActivity(), purposeAPIResponse, this);
-        recyclerView.setAdapter(mAdapter);
+//        mAdapter = new PurposeAdapter(getActivity(), purposeAPIResponse, this);
+//        recyclerView.setAdapter(mAdapter);
 
 
         /*Swipe refresh layout*/

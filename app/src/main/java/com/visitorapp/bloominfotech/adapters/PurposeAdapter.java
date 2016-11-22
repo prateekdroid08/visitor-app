@@ -1,18 +1,27 @@
 package com.visitorapp.bloominfotech.adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.visitorapp.bloominfotech.R;
 import com.visitorapp.bloominfotech.interfaces.OnCompanyItemClick;
 import com.visitorapp.bloominfotech.interfaces.OnPurposeItemClick;
+import com.visitorapp.bloominfotech.models.companies.CompanyList;
 import com.visitorapp.bloominfotech.models.companies.ResponseCompanies;
 import com.visitorapp.bloominfotech.models.purpose.PurposeAPIResponse;
+import com.visitorapp.bloominfotech.models.purpose.PurposeList;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -20,69 +29,90 @@ import butterknife.ButterKnife;
 /**
  * Created by hp on 10/25/2016.
  */
-public class PurposeAdapter extends RecyclerView.Adapter<PurposeAdapter.MyViewHolder> {
+public class PurposeAdapter extends ArrayAdapter<PurposeList> implements Filterable {
 
-    PurposeAPIResponse purposeAPIResponse;
-    private Context mContext;
+    List<PurposeList> items;
+    List<PurposeList> itemsAll;
+    List<PurposeList> suggestions;
+    Context mContext;
     OnPurposeItemClick onPurposeItemClick;
 
 
-    public PurposeAdapter(Context context, PurposeAPIResponse purposeAPIResponse, OnPurposeItemClick onPurposeItemClick) {
-        this.purposeAPIResponse = purposeAPIResponse;
+    public PurposeAdapter(Context context, int resource, List<PurposeList> items, OnPurposeItemClick onPurposeItemClick) {
+        super(context, resource, items);
         this.mContext = context;
+        this.items = items;
+        this.itemsAll = (ArrayList<PurposeList>) ((ArrayList<PurposeList>) items).clone();
+        this.suggestions = new ArrayList<>();
 
         this.onPurposeItemClick = onPurposeItemClick;
 
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public Filter getFilter() {
+        return myFilter;
+    }
 
+    @NonNull
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
-        @Bind(R.id.companyTV)
-        TextView mName;
-
-
-        @Bind(R.id.mainframe)
-        LinearLayout mMain_frame;
-
-
-        public MyViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
+        View view = convertView;
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.adapter_companies_item, parent, false);
         }
+
+        PurposeList purposeList = itemsAll.get(position);
+        if (purposeList != null) {
+            TextView companyTV = (TextView) view.findViewById(R.id.companyTV);
+            if (companyTV != null)
+                companyTV.setText(purposeList.getPurposeName());
+        }
+
+        return view;
     }
 
-    @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.adapter_companies_item, viewGroup, false);
 
-        return new MyViewHolder(itemView);
-    }
+    Filter myFilter = new Filter() {
 
+        @Override
+        public String convertResultToString(Object resultValue) {
+            String str = ((PurposeList) (resultValue)).getPurposeName();
+            return str;
+        }
 
-    @Override
-    public void onBindViewHolder(final MyViewHolder contactViewHolder, final int position) {
-
-
-        if (purposeAPIResponse.getPurposeList().get(position).getPurposeName() != null)
-            contactViewHolder.mName.setText(purposeAPIResponse.getPurposeList().get(position).getPurposeName());
-
-
-        contactViewHolder.mMain_frame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onPurposeItemClick.OnPurposeItemClick(purposeAPIResponse, position);
+        @SuppressWarnings("unchecked")
+        @Override
+        public void publishResults(CharSequence constraint, FilterResults results) {
+            ArrayList<PurposeList> filteredList = (ArrayList<PurposeList>) results.values;
+            if (results != null && results.count > 0) {
+                clear();
+                for (PurposeList c : filteredList) {
+                    add(c);
+                }
+                notifyDataSetChanged();
             }
-        });
+        }
 
-
-    }
-
-
-    @Override
-    public int getItemCount() {
-        return purposeAPIResponse.getPurposeList().size();
-    }
-
+        @Override
+        public FilterResults performFiltering(CharSequence constraint) {
+            if (constraint != null) {
+                suggestions.clear();
+                for (PurposeList customer : itemsAll) {
+                    if (customer.getPurposeName().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                        suggestions.add(customer);
+                    }
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = suggestions;
+                filterResults.count = suggestions.size();
+                return filterResults;
+            } else {
+                return new FilterResults();
+            }
+        }
+    };
 
 }

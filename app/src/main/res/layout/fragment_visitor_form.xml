@@ -32,12 +32,18 @@
                 android:paddingTop="@dimen/activity_vertical_margin">
 
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="48dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/ic_app_logo" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_10dp"
+                        android:layout_marginTop="48dp"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_app_logo" />
+                </RelativeLayout>
 
 
                 <TextView
@@ -97,7 +103,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@string/fontFamily__roboto_condensed"
-                        android:hint="Last Name"
+                        android:hint="Last Name(Optional)"
                         android:imeOptions="actionNext"
                         android:inputType="text"
                         android:textColor="@color/black_color"
@@ -114,7 +120,6 @@
                     android:layout_marginRight="@dimen/margin_40dp"
                     android:layout_marginTop="@dimen/margin_5dp"
                     android:background="@drawable/button_selector"
-                    android:drawableLeft="@drawable/ic_action_arrow_left"
                     android:gravity="center"
                     android:text="Add Members"
                     android:textAlignment="gravity"
@@ -177,14 +182,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_10dp">
 
-                    <EditText
+                    <AutoCompleteTextView
                         android:id="@+id/visitor_company_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:cursorVisible="false"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
+                        android:completionThreshold="1"
                         android:fontFamily="@string/fontFamily__roboto_condensed"
                         android:hint="Company Name*"
                         android:imeOptions="actionNext"
@@ -224,7 +226,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@string/fontFamily__roboto_condensed"
-                        android:hint="Car Registration Number"
+                        android:hint="Car Registration Number(Optional)"
                         android:imeOptions="actionNext"
                         android:inputType="text"
                         android:textColor="@color/black_color"
@@ -238,13 +240,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_5dp">
 
-                    <EditText
+                    <AutoCompleteTextView
                         android:id="@+id/purpose_of_visit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:cursorVisible="false"
-                        android:focusable="false"
                         android:fontFamily="@string/fontFamily__roboto_condensed"
                         android:hint="Purpose of Visit*"
                         android:imeOptions="actionNext"
@@ -292,16 +291,17 @@
                     android:textColor="@color/white_color"
                     android:textSize="@dimen/text_18sp" />
 
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/margin_40dp"
                     android:layout_marginTop="@dimen/margin_20dp"
+                    android:background="@color/colorPrimaryDark"
                     android:fontFamily="@string/fontFamily__roboto_condensed"
+                    android:gravity="center"
                     android:padding="@dimen/padding_10dp"
-                    android:text="You must ensure you have logged back out when exiting the premise"
-                    android:textColor="@color/colorPrimary"
+                    android:text="@string/please_remenber_to_sign_out_when_exiting_the_building"
+                    android:textColor="@color/white_color"
                     android:textSize="@dimen/text_18sp" />
 
 

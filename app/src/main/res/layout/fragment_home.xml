@@ -32,12 +32,19 @@
                 android:paddingTop="@dimen/activity_vertical_margin">
 
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="48dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/ic_app_logo" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_10dp"
+                        android:layout_marginLeft="@dimen/margin_10dp"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_app_logo" />
+
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/admin_login"
@@ -72,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_5dp"
                     android:fontFamily="@string/fontFamily__roboto_condensed"
-                    android:padding="@dimen/padding_10dp"
+                    android:padding="@dimen/padding_5dp"
                     android:text="Date : "
                     android:textSize="@dimen/text_18sp" />
 
@@ -82,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_5dp"
                     android:fontFamily="@string/fontFamily__roboto_condensed"
-                    android:padding="@dimen/padding_10dp"
+                    android:padding="@dimen/padding_5dp"
                     android:text="Time : "
                     android:textSize="@dimen/text_18sp" />
 
@@ -92,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_25dp"
                     android:layout_marginRight="@dimen/margin_25dp"
-                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:layout_marginTop="@dimen/margin_5dp"
                     android:background="@drawable/custom_button_background"
                     android:fontFamily="@string/fontFamily__roboto_condensed"
                     android:gravity="center"
@@ -109,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_25dp"
                     android:layout_marginRight="@dimen/margin_25dp"
-                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:layout_marginTop="@dimen/margin_5dp"
                     android:background="@drawable/custom_button_background"
                     android:fontFamily="@string/fontFamily__roboto_condensed"
                     android:gravity="center"
@@ -123,11 +130,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:layout_marginTop="@dimen/margin_20dp"
                     android:fontFamily="@string/fontFamily__roboto_condensed"
+                    android:gravity="center"
                     android:padding="@dimen/padding_10dp"
+                    android:background="@color/colorPrimaryDark"
                     android:text="@string/please_remenber_to_sign_out_when_exiting_the_building"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/white_color"
                     android:textSize="@dimen/text_18sp" />
 
             </LinearLayout>

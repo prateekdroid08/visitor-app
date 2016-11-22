@@ -2,33 +2,26 @@ package com.visitorapp.bloominfotech.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.visitorapp.bloominfotech.R;
 import com.visitorapp.bloominfotech.interfaces.OnCompanyItemClick;
 import com.visitorapp.bloominfotech.models.companies.CompanyList;
-import com.visitorapp.bloominfotech.models.companies.ResponseCompanies;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 /**
- * Created by hp on 10/25/2016.
+ * Created by prateekarora on 22/11/16.
  */
-public class CompanyAdapter extends ArrayAdapter<CompanyList> implements Filterable {
+
+public class CompanyFilterAdapter extends ArrayAdapter<CompanyList> implements Filterable {
 
     List<CompanyList> items;
     List<CompanyList> itemsAll;
@@ -38,7 +31,7 @@ public class CompanyAdapter extends ArrayAdapter<CompanyList> implements Filtera
 
 
 
-    public CompanyAdapter(Context context, int resource, List<CompanyList> items,
+    public CompanyFilterAdapter(Context context, int resource, List<CompanyList> items,
                           OnCompanyItemClick onCompanyItemClick) {
         super(context, resource, items);
         this.mContext = context;

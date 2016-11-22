@@ -3,19 +3,35 @@ package com.visitorapp.bloominfotech.views.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.visitorapp.bloominfotech.R;
+import com.visitorapp.bloominfotech.adapters.CompanyAdapter;
+import com.visitorapp.bloominfotech.adapters.CompanyFilterAdapter;
+import com.visitorapp.bloominfotech.adapters.PurposeFilterAdapter;
+import com.visitorapp.bloominfotech.interfaces.OnCompanyItemClick;
+import com.visitorapp.bloominfotech.interfaces.OnPurposeItemClick;
 import com.visitorapp.bloominfotech.models.PostResponse;
 import com.visitorapp.bloominfotech.models.ResponseVistorForm;
+import com.visitorapp.bloominfotech.models.companies.ResponseCompanies;
 import com.visitorapp.bloominfotech.models.eventbus.MessageEvent;
 import com.visitorapp.bloominfotech.models.form_response.ResponseVisitorForm;
+import com.visitorapp.bloominfotech.models.purpose.PurposeAPIResponse;
+import com.visitorapp.bloominfotech.presenter.companies.CompanyListView;
+import com.visitorapp.bloominfotech.presenter.companies.CompanylistPresenter;
+import com.visitorapp.bloominfotech.presenter.companies.CompanylistPresenterImpl;
+import com.visitorapp.bloominfotech.presenter.purpose_of_visit.PurposePresenter;
+import com.visitorapp.bloominfotech.presenter.purpose_of_visit.PurposePresenterImpl;
+import com.visitorapp.bloominfotech.presenter.purpose_of_visit.PurposeView;
 import com.visitorapp.bloominfotech.presenter.visitor_form.VisitorPresenter;
 import com.visitorapp.bloominfotech.presenter.visitor_form.VisitorPresenterImpl;
 import com.visitorapp.bloominfotech.presenter.visitor_form.VisitorView;
@@ -34,7 +50,8 @@ import de.greenrobot.event.EventBus;
 /**
  * Created by hp on 10/19/2016.
  */
-public class FragmentVisitorForm extends Fragment implements VisitorView {
+public class FragmentVisitorForm extends Fragment implements VisitorView,
+        PurposeView, CompanyListView, OnCompanyItemClick, OnPurposeItemClick {
 
     public static FragmentVisitorForm newInstance() {
         FragmentVisitorForm fragmentVisitorForm = new FragmentVisitorForm();
@@ -60,7 +77,7 @@ public class FragmentVisitorForm extends Fragment implements VisitorView {
     EditText visitor_Last_name;
 
     @Bind(R.id.visitor_company_name)
-    EditText mVisitor_company_name;
+    AutoCompleteTextView mVisitor_company_name;
 
     @Bind(R.id.phone_number)
     EditText phone_number;
@@ -69,7 +86,7 @@ public class FragmentVisitorForm extends Fragment implements VisitorView {
     EditText car_registration;
 
     @Bind(R.id.purpose_of_visit)
-    EditText purposeOfVisit;
+    AutoCompleteTextView purposeOfVisit;
 
     @Bind(R.id.meeting_with)
     EditText meeting_with;
@@ -88,6 +105,11 @@ public class FragmentVisitorForm extends Fragment implements VisitorView {
 
     VisitorPresenter visitorPresenter;
 
+    CompanylistPresenter companylistPresenter;
+    PurposePresenter purposePresenter;
+    CompanyFilterAdapter companyFilterAdapter;
+    PurposeFilterAdapter purposeFilterAdapter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -99,6 +121,12 @@ public class FragmentVisitorForm extends Fragment implements VisitorView {
         ((HomeActivity) getActivity()).mToolbarTitle.setText("Visitor Form");
 
         visitorPresenter = new VisitorPresenterImpl(getActivity(), this);
+
+        companylistPresenter = new CompanylistPresenterImpl(getActivity(), this);
+        companylistPresenter.getCompanyList("", 0, true);
+
+        purposePresenter = new PurposePresenterImpl(getActivity(), this);
+        purposePresenter.getAllPurpose();
 
         return view;
     }
@@ -115,11 +143,6 @@ public class FragmentVisitorForm extends Fragment implements VisitorView {
 
         }
 
-    }
-
-    @OnClick(R.id.visitor_company_name)
-    void methodAddcompany(View view) {
-        ((HomeActivity) getActivity()).visitorPresenter.navigateTo(FragmentCompanyList.newInstance());
     }
 
     @OnClick(R.id.purpose_of_visit)
@@ -201,6 +224,26 @@ public class FragmentVisitorForm extends Fragment implements VisitorView {
     }
 
     @Override
+    public void onSuccess(ResponseCompanies responseCompanies) {
+        if (responseCompanies != null) {
+            companyFilterAdapter = new CompanyFilterAdapter(getActivity(), R.layout.fragment_visitor_form,
+                    responseCompanies.getCompanyLists(), this);
+            mVisitor_company_name.setThreshold(1);
+            mVisitor_company_name.setAdapter(companyFilterAdapter);
+        }
+    }
+
+    @Override
+    public void onSuccess(PurposeAPIResponse purposeAPIResponse) {
+        if (purposeAPIResponse != null) {
+            purposeFilterAdapter = new PurposeFilterAdapter(getActivity(), R.layout.fragment_visitor_form,
+                    purposeAPIResponse.getPurposeList(), this);
+            purposeOfVisit.setThreshold(1);
+            purposeOfVisit.setAdapter(purposeFilterAdapter);
+        }
+    }
+
+    @Override
     public void onError(String message) {
         ViewUtils.showMessage(getActivity(), message);
     }
@@ -209,6 +252,12 @@ public class FragmentVisitorForm extends Fragment implements VisitorView {
     public void showProgress() {
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.show();
+    }
+
+    @Override
+    public void hideProgressView() {
+        if (progressDialog != null)
+            progressDialog.dismiss();
     }
 
     @Override
@@ -232,11 +281,6 @@ public class FragmentVisitorForm extends Fragment implements VisitorView {
 
         if (visitor_first_name.getText().toString().length() <= 0) {
             ViewUtils.showMessage(getActivity(), "Please enter your first name.");
-            return;
-        }
-
-        if (visitor_Last_name.getText().toString().length() <= 0) {
-            ViewUtils.showMessage(getActivity(), "Please enter your last name.");
             return;
         }
 
@@ -277,6 +321,16 @@ public class FragmentVisitorForm extends Fragment implements VisitorView {
                 car_registration.getText().toString(),
                 phone_number.getText().toString(),
                 visitor_add_members.getText().toString());
+
+    }
+
+    @Override
+    public void onCompanyItemSelected(ResponseCompanies responseCompanies, int position) {
+
+    }
+
+    @Override
+    public void OnPurposeItemClick(PurposeAPIResponse purposeAPIResponse, int position) {
 
     }
 }

@@ -2,50 +2,43 @@ package com.visitorapp.bloominfotech.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.visitorapp.bloominfotech.R;
-import com.visitorapp.bloominfotech.interfaces.OnCompanyItemClick;
-import com.visitorapp.bloominfotech.models.companies.CompanyList;
-import com.visitorapp.bloominfotech.models.companies.ResponseCompanies;
+import com.visitorapp.bloominfotech.interfaces.OnPurposeItemClick;
+import com.visitorapp.bloominfotech.models.purpose.PurposeList;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 /**
- * Created by hp on 10/25/2016.
+ * Created by prateekarora on 22/11/16.
  */
-public class CompanyAdapter extends ArrayAdapter<CompanyList> implements Filterable {
 
-    List<CompanyList> items;
-    List<CompanyList> itemsAll;
-    List<CompanyList> suggestions;
+public class PurposeFilterAdapter extends ArrayAdapter<PurposeList> implements Filterable {
+
+    List<PurposeList> items;
+    List<PurposeList> itemsAll;
+    List<PurposeList> suggestions;
     Context mContext;
-    OnCompanyItemClick onCompanyItemClick;
+    OnPurposeItemClick onPurposeItemClick;
 
 
-
-    public CompanyAdapter(Context context, int resource, List<CompanyList> items,
-                          OnCompanyItemClick onCompanyItemClick) {
+    public PurposeFilterAdapter(Context context, int resource, List<PurposeList> items, OnPurposeItemClick onPurposeItemClick) {
         super(context, resource, items);
         this.mContext = context;
         this.items = items;
-        this.itemsAll = (ArrayList<CompanyList>) ((ArrayList<CompanyList>) items).clone();
+        this.itemsAll = (ArrayList<PurposeList>) ((ArrayList<PurposeList>) items).clone();
         this.suggestions = new ArrayList<>();
-        this.onCompanyItemClick = onCompanyItemClick;
+
+        this.onPurposeItemClick = onPurposeItemClick;
+
     }
 
     @Override
@@ -63,11 +56,11 @@ public class CompanyAdapter extends ArrayAdapter<CompanyList> implements Filtera
             view = inflater.inflate(R.layout.adapter_companies_item, parent, false);
         }
 
-        CompanyList companyList = itemsAll.get(position);
-        if (companyList != null) {
+        PurposeList purposeList = itemsAll.get(position);
+        if (purposeList != null) {
             TextView companyTV = (TextView) view.findViewById(R.id.companyTV);
             if (companyTV != null)
-                companyTV.setText(companyList.getCompanyName());
+                companyTV.setText(purposeList.getPurposeName());
         }
 
         return view;
@@ -78,17 +71,17 @@ public class CompanyAdapter extends ArrayAdapter<CompanyList> implements Filtera
 
         @Override
         public String convertResultToString(Object resultValue) {
-            String str = ((CompanyList) (resultValue)).getCompanyName();
+            String str = ((PurposeList) (resultValue)).getPurposeName();
             return str;
         }
 
         @SuppressWarnings("unchecked")
         @Override
         public void publishResults(CharSequence constraint, FilterResults results) {
-            ArrayList<CompanyList> filteredList = (ArrayList<CompanyList>) results.values;
+            ArrayList<PurposeList> filteredList = (ArrayList<PurposeList>) results.values;
             if (results != null && results.count > 0) {
                 clear();
-                for (CompanyList c : filteredList) {
+                for (PurposeList c : filteredList) {
                     add(c);
                 }
                 notifyDataSetChanged();
@@ -99,8 +92,8 @@ public class CompanyAdapter extends ArrayAdapter<CompanyList> implements Filtera
         public FilterResults performFiltering(CharSequence constraint) {
             if (constraint != null) {
                 suggestions.clear();
-                for (CompanyList customer : itemsAll) {
-                    if (customer.getCompanyName().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                for (PurposeList customer : itemsAll) {
+                    if (customer.getPurposeName().toLowerCase().contains(constraint.toString().toLowerCase())) {
                         suggestions.add(customer);
                     }
                 }
@@ -113,6 +106,5 @@ public class CompanyAdapter extends ArrayAdapter<CompanyList> implements Filtera
             }
         }
     };
-
 
 }
