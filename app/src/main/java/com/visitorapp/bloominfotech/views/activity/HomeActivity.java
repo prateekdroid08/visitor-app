@@ -49,4 +49,11 @@ public class HomeActivity extends VisitorActivity {
         return null;
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+
+
+    }
 }

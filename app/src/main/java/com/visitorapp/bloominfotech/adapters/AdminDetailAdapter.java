@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.visitorapp.bloominfotech.R;
+import com.visitorapp.bloominfotech.interfaces.OnAdminDetailItemClick;
 import com.visitorapp.bloominfotech.interfaces.OnCompanyItemClick;
 import com.visitorapp.bloominfotech.models.admin_detail.ResponseAdminDetail;
 import com.visitorapp.bloominfotech.models.admin_detail.UserDetails;
@@ -30,11 +31,13 @@ public class AdminDetailAdapter extends RecyclerView.Adapter<AdminDetailAdapter.
 
     ArrayList<UserList> lstEvt;
     Context mContext;
+    OnAdminDetailItemClick onAdminDetailItemClick;
 
 
-    public AdminDetailAdapter(Context context, ArrayList<UserList> lstEvt) {
+    public AdminDetailAdapter(Context context, ArrayList<UserList> lstEvt, OnAdminDetailItemClick onAdminDetailItemClick) {
         this.lstEvt = lstEvt;
         this.mContext = context;
+        this.onAdminDetailItemClick = onAdminDetailItemClick;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -44,41 +47,13 @@ public class AdminDetailAdapter extends RecyclerView.Adapter<AdminDetailAdapter.
         @Bind(R.id.visitor_id)
         TextView visitorId;
 
-        @Nullable
-        @Bind(R.id.date_of_visit)
-        TextView dateOfVisit;
+
 
         @Nullable
         @Bind(R.id.name)
         TextView mName;
 
-        @Nullable
-        @Bind(R.id.company_name)
-        TextView companyName;
 
-        @Nullable
-        @Bind(R.id.car_registration_number)
-        TextView carRegistrationNo;
-
-        @Nullable
-        @Bind(R.id.purpose_of_visit)
-        TextView purposeOfVisit;
-
-        @Nullable
-        @Bind(R.id.meeting_with)
-        TextView meetingWith;
-
-        @Nullable
-        @Bind(R.id.time_in)
-        TextView timeIn;
-
-        @Nullable
-        @Bind(R.id.time_out)
-        TextView timeOut;
-
-        @Nullable
-        @Bind(R.id.time_spent)
-        TextView timeSpent;
 
         @Nullable
         @Bind(R.id.admin_list_frame)
@@ -107,9 +82,7 @@ public class AdminDetailAdapter extends RecyclerView.Adapter<AdminDetailAdapter.
             contactViewHolder.visitorId.setText(Html.fromHtml("<b>" + mContext.getResources().getString(R.string.visitor_id) + "</b>"
                     + " " + lstEvt.get(position).getUniqueKey()));
 
-        if (lstEvt.get(position).getCreatedOn() != null)
-            contactViewHolder.dateOfVisit.setText(Html.fromHtml("<b>" + mContext.getResources().getString(R.string.date_of_visit) + "</b>"
-                    + " " + lstEvt.get(position).getCreatedOn()));
+
 
         if (lstEvt.get(position).getUserDetails().getFirstName() != null) {
             if (lstEvt.get(position).getUserDetails().getLastName() != null)
@@ -123,40 +96,13 @@ public class AdminDetailAdapter extends RecyclerView.Adapter<AdminDetailAdapter.
                         lstEvt.get(position).getUserDetails().getFirstName()));
         }
 
-        if (lstEvt.get(position).getCompanyDetails().getCompanyName() != null)
-            contactViewHolder.companyName.setText(Html.fromHtml("<b>" + mContext.getResources().getString(R.string.company_name) + "</b>"
-                    + " " + lstEvt.get(position).getCompanyDetails().getCompanyName()));
 
-        if (lstEvt.get(position).getUserDetails().getCarNumber() != null)
-            contactViewHolder.carRegistrationNo.setText(Html.fromHtml("<b>" + mContext.getResources().
-                    getString(R.string.car_registration_no) + "</b>"
-                    + " " + lstEvt.get(position).getUserDetails().getCarNumber()));
-
-        if (lstEvt.get(position).getPurposeDetails().getPurposeName() != null)
-            contactViewHolder.purposeOfVisit.setText(Html.fromHtml("<b>"+ mContext.getResources().getString(R.string.purpose_of_visit)+"</b>"
-                    + " " + lstEvt.get(position).getPurposeDetails().getPurposeName()));
-
-        if (lstEvt.get(position).getMeetingDetails().getName() != null)
-            contactViewHolder.meetingWith.setText(Html.fromHtml("<b>"+ mContext.getResources().getString(R.string.meeting_with)+"</b>"
-                    + " " + lstEvt.get(position).getMeetingDetails().getName()));
-
-        if (lstEvt.get(position).getTimeIn() != null)
-            contactViewHolder.timeIn.setText(Html.fromHtml("<b>"+ mContext.getResources().getString(R.string.time_in_hh_mm_ss) + "</b>"
-                    + " " + lstEvt.get(position).getTimeIn()));
-
-        if (lstEvt.get(position).getTimeOut() != null)
-            contactViewHolder.timeOut.setText(Html.fromHtml("<b>"+ mContext.getResources().getString(R.string.time_out_hh_mm_ss)+"</b>"
-                    + " " + lstEvt.get(position).getTimeOut()));
-
-        if (lstEvt.get(position).getTimeSpent() != null)
-            contactViewHolder.timeSpent.setText(Html.fromHtml("<b>"+ mContext.getResources().getString(R.string.time_spent_hh_mm_ss)+"</b>"
-                    + " " + lstEvt.get(position).getTimeSpent()));
 
 
         contactViewHolder.mMain_frame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                onAdminDetailItemClick.onAdminDetailItemClicked(lstEvt, position);
             }
         });
 
