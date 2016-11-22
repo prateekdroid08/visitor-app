@@ -1,24 +1,33 @@
 package com.visitorapp.bloominfotech.views.fragments;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.visitorapp.bloominfotech.R;
 import com.visitorapp.bloominfotech.models.admin_detail.FilterData;
 import com.visitorapp.bloominfotech.models.eventbus.MessageEvent;
+import com.visitorapp.bloominfotech.utils.DatePickerFragment;
+import com.visitorapp.bloominfotech.utils.ViewUtils;
+import com.visitorapp.bloominfotech.utils.datetimepicker.DateFormat;
 import com.visitorapp.bloominfotech.utils.datetimepicker.DateTime;
 import com.visitorapp.bloominfotech.utils.datetimepicker.DateTimePicker;
 import com.visitorapp.bloominfotech.utils.datetimepicker.SimpleDateTimePicker;
 import com.visitorapp.bloominfotech.views.activity.HomeActivity;
 
 import java.text.DateFormatSymbols;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -28,7 +37,7 @@ import de.greenrobot.event.EventBus;
 /**
  * Created by hp on 10/21/2016.
  */
-public class FragmentFilter extends Fragment implements DateTimePicker.OnDateTimeSetListener {
+public class FragmentFilter extends Fragment implements View.OnClickListener {
 
     View view;
 
@@ -50,9 +59,20 @@ public class FragmentFilter extends Fragment implements DateTimePicker.OnDateTim
     @Bind(R.id.meeting_filter)
     EditText meetingFilter;
 
-    String datepickerSelector = "";
+    public static String datepickerSelector = "";
 
     FilterData filterData = new FilterData();
+    public static Date setmindate = null;
+
+    private DatePickerDialog fromDatePickerDialog;
+    private DatePickerDialog toDatePickerDialog;
+
+    private SimpleDateFormat dateFormatter;
+
+    Calendar newDateFrom;
+    Calendar newDateTo;
+    Date dateFrom = new Date(System.currentTimeMillis());
+
 
     @Nullable
     @Override
@@ -60,8 +80,10 @@ public class FragmentFilter extends Fragment implements DateTimePicker.OnDateTim
         view = inflater.inflate(R.layout.fragment_filter, container, false);
  /*init butterknife*/
         ButterKnife.bind(this, view);
+        dateFormatter = new SimpleDateFormat("dd MMM , yy", Locale.US);
 
 
+        setDateTimeField();
         return view;
     }
 
@@ -86,51 +108,42 @@ public class FragmentFilter extends Fragment implements DateTimePicker.OnDateTim
         ((HomeActivity) getActivity()).visitorPresenter.navigateTo(FragmentMeetingList.newInstance());
     }
 
-    @OnClick(R.id.dateFrom)
-    public void methodDateFrom(View view) {
-        datepickerSelector = "dateFrom";
-        SimpleDateTimePicker simpleDateTimePicker = SimpleDateTimePicker.make(
-                getString(R.string.set_date_time),
-                new Date(),
-                this,
-                getFragmentManager()
-        );
 
-        simpleDateTimePicker.show();
+    private void setDateTimeField() {
+        mDateFrom.setOnClickListener(this);
+        mDateTo.setOnClickListener(this);
+
+        Calendar newCalendar = Calendar.getInstance();
+        fromDatePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                newDateFrom = Calendar.getInstance();
+                newDateFrom.set(year, monthOfYear, dayOfMonth);
+                mDateFrom.setText(dateFormatter.format(newDateFrom.getTime()));
+                filterData.setSrchDate(dateFormatter.format(newDateFrom.getTime()));
+                String strDateFrom = dateFormatter.format(newDateFrom.getTime());
+                try {
+                    dateFrom = dateFormatter.parse(strDateFrom);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+        toDatePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                newDateTo = Calendar.getInstance();
+                newDateTo.set(year, monthOfYear, dayOfMonth);
+                mDateTo.setText(dateFormatter.format(newDateTo.getTime()));
+                filterData.setSrchDateTo(dateFormatter.format(newDateTo.getTime()));
+            }
+
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        toDatePickerDialog.getDatePicker().setMinDate(dateFrom.getTime());
+
     }
-
-    @OnClick(R.id.dateTo)
-    public void methodDateTo(View view) {
-        datepickerSelector = "dateTo";
-        SimpleDateTimePicker simpleDateTimePicker = SimpleDateTimePicker.make(
-                getString(R.string.set_date_time),
-                new Date(),
-                this,
-                getFragmentManager()
-        );
-
-        simpleDateTimePicker.show();
-    }
-
-
-    @Override
-    public void DateTimeSet(Date date) {
-        DateTime mDateTime = new DateTime(date);
-        if (datepickerSelector.equalsIgnoreCase("dateFrom")) {
-            mDateFrom.setText(mDateTime.getDayOfMonth() + " " +
-                    new DateFormatSymbols().getMonths()[mDateTime.getMonthOfYear()] + ", " + mDateTime.getYear());
-
-            filterData.setSrchDate(mDateTime.getDayOfMonth() + " " +
-                    new DateFormatSymbols().getMonths()[mDateTime.getMonthOfYear()] + ", " + mDateTime.getYear());
-        } else if (datepickerSelector.equalsIgnoreCase("dateTo")) {
-            mDateTo.setText(mDateTime.getDayOfMonth() + " " +
-                    new DateFormatSymbols().getMonths()[mDateTime.getMonthOfYear()] + ", " + mDateTime.getYear());
-
-            filterData.setSrchDateTo(mDateTime.getDayOfMonth() + " " +
-                    new DateFormatSymbols().getMonths()[mDateTime.getMonthOfYear()] + ", " + mDateTime.getYear());
-        }
-    }
-
 
     @OnClick(R.id.FilterSave)
     public void methodFilterSave(View view) {
@@ -179,5 +192,21 @@ public class FragmentFilter extends Fragment implements DateTimePicker.OnDateTim
         }
 
     }
+
+    @Override
+    public void onClick(View v) {
+        if (v == mDateFrom) {
+            fromDatePickerDialog.show();
+        } else if (v == mDateTo) {
+
+            if (mDateFrom.getText().toString().trim().equalsIgnoreCase("")) {
+                ViewUtils.showMessage(getActivity(), "Please select dateFrom first.");
+                return;
+            }
+
+            toDatePickerDialog.show();
+        }
+    }
+
 }
 

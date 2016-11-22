@@ -26,56 +26,15 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/visitor_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left|center_vertical"
-                android:maxLines="1"
-                android:paddingLeft="@dimen/padding_2dp"
-                android:text="@string/visitor_id"
-                android:paddingRight="@dimen/padding_5dp"
-                android:paddingTop="@dimen/padding_5dp"
-                android:textAlignment="gravity"
-                android:textColor="@color/black_color"
-                android:textSize="@dimen/text_18sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginRight="@dimen/margin_20dp"
-                android:background="@android:color/darker_gray"/>
-
-            <TextView
-                android:id="@+id/date_of_visit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left|center_vertical"
-                android:maxLines="1"
-                android:paddingBottom="@dimen/padding_10dp"
-                android:text="@string/date_of_visit"
-                android:paddingLeft="@dimen/padding_2dp"
-                android:paddingRight="@dimen/padding_5dp"
-                android:paddingTop="@dimen/padding_5dp"
-                android:textAlignment="gravity"
-                android:textColor="@color/black_color"
-                android:textSize="@dimen/text_18sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginRight="@dimen/margin_20dp"
-                android:background="@android:color/darker_gray"/>
-
-            <TextView
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left|center_vertical"
                 android:maxLines="1"
+                android:paddingBottom="@dimen/padding_10dp"
+                android:paddingLeft="@dimen/padding_2dp"
+                android:paddingRight="@dimen/padding_5dp"
                 android:text="@string/name"
-                android:paddingBottom="@dimen/padding_10dp"
-                android:paddingLeft="@dimen/padding_2dp"
-                android:paddingRight="@dimen/padding_5dp"
                 android:textAlignment="gravity"
                 android:textColor="@color/black_color"
                 android:textSize="@dimen/text_18sp" />
@@ -84,18 +43,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginRight="@dimen/margin_20dp"
-                android:background="@android:color/darker_gray"/>
+                android:background="@android:color/darker_gray" />
+
 
             <TextView
-                android:id="@+id/company_name"
+                android:id="@+id/visitor_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left|center_vertical"
                 android:maxLines="1"
-                android:text="@string/company_name"
-                android:paddingBottom="@dimen/padding_10dp"
+                android:paddingBottom="@dimen/padding_5dp"
                 android:paddingLeft="@dimen/padding_2dp"
                 android:paddingRight="@dimen/padding_5dp"
+                android:paddingTop="@dimen/padding_5dp"
+                android:text="@string/visitor_id"
                 android:textAlignment="gravity"
                 android:textColor="@color/black_color"
                 android:textSize="@dimen/text_18sp" />
@@ -104,127 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginRight="@dimen/margin_20dp"
-                android:background="@android:color/darker_gray"/>
-
-            <TextView
-                android:id="@+id/car_registration_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left|center_vertical"
-                android:maxLines="1"
-                android:text="@string/car_registration_no"
-                android:paddingBottom="@dimen/padding_10dp"
-                android:paddingLeft="@dimen/padding_2dp"
-                android:paddingRight="@dimen/padding_5dp"
-                android:textAlignment="gravity"
-                android:textColor="@color/black_color"
-                android:textSize="@dimen/text_18sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginRight="@dimen/margin_20dp"
-                android:background="@android:color/darker_gray"/>
-
-            <TextView
-                android:id="@+id/purpose_of_visit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left|center_vertical"
-                android:maxLines="1"
-                android:text="@string/purpose_of_visit"
-                android:paddingBottom="@dimen/padding_10dp"
-                android:paddingLeft="@dimen/padding_2dp"
-                android:paddingRight="@dimen/padding_5dp"
-                android:textAlignment="gravity"
-                android:textColor="@color/black_color"
-                android:textSize="@dimen/text_18sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginRight="@dimen/margin_20dp"
-                android:background="@android:color/darker_gray"/>
-
-            <TextView
-                android:id="@+id/meeting_with"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left|center_vertical"
-                android:maxLines="1"
-                android:text="@string/meeting_with"
-                android:paddingBottom="@dimen/padding_10dp"
-                android:paddingLeft="@dimen/padding_2dp"
-                android:paddingRight="@dimen/padding_5dp"
-                android:textAlignment="gravity"
-                android:textColor="@color/black_color"
-                android:textSize="@dimen/text_18sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginRight="@dimen/margin_20dp"
-                android:background="@android:color/darker_gray"/>
-
-            <TextView
-                android:id="@+id/time_in"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left|center_vertical"
-                android:maxLines="1"
-                android:paddingBottom="@dimen/padding_10dp"
-                android:paddingLeft="@dimen/padding_2dp"
-                android:paddingRight="@dimen/padding_5dp"
-                android:textAlignment="gravity"
-                android:text="@string/time_in_hh_mm_ss"
-                android:textColor="@color/black_color"
-                android:textSize="@dimen/text_18sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginRight="@dimen/margin_20dp"
-                android:background="@android:color/darker_gray"/>
-
-            <TextView
-                android:id="@+id/time_out"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left|center_vertical"
-                android:maxLines="1"
-                android:text="@string/time_out_hh_mm_ss"
-                android:paddingBottom="@dimen/padding_10dp"
-                android:paddingLeft="@dimen/padding_2dp"
-                android:paddingRight="@dimen/padding_5dp"
-                android:textAlignment="gravity"
-                android:textColor="@color/black_color"
-                android:textSize="@dimen/text_18sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginRight="@dimen/margin_20dp"
-                android:background="@android:color/darker_gray"/>
-
-            <TextView
-                android:id="@+id/time_spent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left|center_vertical"
-                android:maxLines="1"
-                android:text="@string/time_spent_hh_mm_ss"
-                android:paddingBottom="@dimen/padding_10dp"
-                android:paddingLeft="@dimen/padding_2dp"
-                android:paddingRight="@dimen/padding_5dp"
-                android:textAlignment="gravity"
-                android:textColor="@color/black_color"
-                android:textSize="@dimen/text_18sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginRight="@dimen/margin_20dp"
-                android:background="@android:color/darker_gray"/>
+                android:background="@android:color/darker_gray" />
 
 
         </LinearLayout>
