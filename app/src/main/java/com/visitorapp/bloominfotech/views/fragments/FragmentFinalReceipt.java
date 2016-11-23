@@ -206,7 +206,9 @@ public class FragmentFinalReceipt extends Fragment implements ReceiptView, OnRec
                 rowItems.clear();
             }
 
-            String nameStr = responseVisitorForm.getUserDetails().getFirstName() + " " + responseVisitorForm.getUserDetails().getLastName();
+            String nameStr = responseVisitorForm.getUserDetails().getFirstName() + " " +
+                    (responseVisitorForm.getUserDetails().getLastName() == null ? "" :
+                            responseVisitorForm.getUserDetails().getLastName());
             String companuStr = responseVisitorForm.getCompanyDetails().getCompanyName();
             String purposestr = responseVisitorForm.getPurposeDetails().getPurposeName();
             String uniqueKey = responseVisitorForm.getUniqueKey();

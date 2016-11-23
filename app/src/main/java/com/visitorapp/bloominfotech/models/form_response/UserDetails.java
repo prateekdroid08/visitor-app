@@ -20,16 +20,16 @@ public class UserDetails {
     private Object emailAddress;
     @SerializedName("FirstName")
     @Expose
-    private String firstName;
+    private String firstName = "";
     @SerializedName("LastName")
     @Expose
-    private String lastName;
+    private String lastName = "";
     @SerializedName("CarNumber")
     @Expose
     private Object carNumber;
     @SerializedName("Phone")
     @Expose
-    private String phone;
+    private String phone = "";
     @SerializedName("DeviceDetails")
     @Expose
     private Object deviceDetails;

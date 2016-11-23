@@ -54,6 +54,7 @@
                     android:gravity="center"
                     android:padding="@dimen/padding_10dp"
                     android:text="View PDF"
+                    android:visibility="invisible"
                     android:textAlignment="gravity"
                     android:textColor="@color/white_color"
                     android:textSize="@dimen/text_14sp" />
@@ -331,8 +332,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/margin_5dp"
                 android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_app_logo" />
+                android:scaleType="centerCrop" />
 
 
         </LinearLayout>

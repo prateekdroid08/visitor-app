@@ -26,13 +26,20 @@
             android:orientation="vertical">
 
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="48dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/ic_app_logo" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/margin_10dp"
+                    android:layout_marginTop="48dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_app_logo" />
+
+            </RelativeLayout>
 
 
             <LinearLayout

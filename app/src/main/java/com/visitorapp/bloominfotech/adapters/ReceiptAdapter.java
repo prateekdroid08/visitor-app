@@ -12,6 +12,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.visitorapp.bloominfotech.R;
 import com.visitorapp.bloominfotech.interfaces.OnCompanyItemClick;
 import com.visitorapp.bloominfotech.interfaces.OnReceiptItemClickListener;
@@ -118,8 +121,23 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
             contactViewHolder.mTime.setText(rowItems.get(position).getTime());
 
         if (rowItems.get(position).getImagelink() != null) {
-            Glide.with(mContext).load(rowItems.get(position).getImagelink()).diskCacheStrategy(DiskCacheStrategy.RESULT)
-                    .skipMemoryCache(false).dontAnimate().placeholder(R.drawable.ic_app_logo).into(contactViewHolder.mImage);
+            Glide.with(mContext)
+                    .load(rowItems.get(position).getImagelink())
+                    .listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            contactViewHolder.mView.setVisibility(View.VISIBLE);
+                            return false;
+                        }
+                    })
+                    .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                    .skipMemoryCache(false).dontAnimate()
+                    .into(contactViewHolder.mImage);
         }
 
 
