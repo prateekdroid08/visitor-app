@@ -3,6 +3,7 @@ package com.visitorapp.bloominfotech.views.fragments;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -26,6 +27,7 @@ import com.visitorapp.bloominfotech.presenter.logout.LogoutPresenterImpl;
 import com.visitorapp.bloominfotech.presenter.logout.LogoutView;
 import com.visitorapp.bloominfotech.utils.ProgressDialog;
 import com.visitorapp.bloominfotech.utils.ViewUtils;
+import com.visitorapp.bloominfotech.views.activity.AdminActivity;
 import com.visitorapp.bloominfotech.views.activity.HomeActivity;
 
 import java.text.SimpleDateFormat;
@@ -106,8 +108,7 @@ public class FragmentLogin extends Fragment implements LogoutView {
 
     @OnClick(R.id.admin_login)
     public void methodAdminlogin(View view) {
-        ((HomeActivity) getActivity()).visitorPresenter.navigateTo(FragmentAdminLogin.newInstance());
-
+        startActivity(new Intent(getActivity(), AdminActivity.class));
     }
 
 

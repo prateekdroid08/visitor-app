@@ -15,20 +15,13 @@ import android.widget.TextView;
 
 import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 import com.visitorapp.bloominfotech.R;
-import com.visitorapp.bloominfotech.adapters.CompanyAdapter;
-import com.visitorapp.bloominfotech.adapters.PurposeAdapter;
-import com.visitorapp.bloominfotech.constants.Constants;
-import com.visitorapp.bloominfotech.interfaces.OnCompanyItemClick;
-import com.visitorapp.bloominfotech.interfaces.OnPurposeItemClick;
-import com.visitorapp.bloominfotech.models.companies.ResponseCompanies;
+import com.visitorapp.bloominfotech.adapters.MeetingAdapter;
+import com.visitorapp.bloominfotech.interfaces.OnMeetingItemClick;
 import com.visitorapp.bloominfotech.models.eventbus.MessageEvent;
-import com.visitorapp.bloominfotech.models.purpose.PurposeAPIResponse;
-import com.visitorapp.bloominfotech.presenter.companies.CompanyListView;
-import com.visitorapp.bloominfotech.presenter.companies.CompanylistPresenter;
-import com.visitorapp.bloominfotech.presenter.companies.CompanylistPresenterImpl;
-import com.visitorapp.bloominfotech.presenter.purpose_of_visit.PurposePresenter;
-import com.visitorapp.bloominfotech.presenter.purpose_of_visit.PurposePresenterImpl;
-import com.visitorapp.bloominfotech.presenter.purpose_of_visit.PurposeView;
+import com.visitorapp.bloominfotech.models.meeting.MeetingResponse;
+import com.visitorapp.bloominfotech.presenter.meeting.MeetingPresenter;
+import com.visitorapp.bloominfotech.presenter.meeting.MeetingPresenterImpl;
+import com.visitorapp.bloominfotech.presenter.meeting.MeetingView;
 import com.visitorapp.bloominfotech.utils.SpacesItemDecoration;
 import com.visitorapp.bloominfotech.utils.ViewUtils;
 import com.visitorapp.bloominfotech.views.activity.AdminActivity;
@@ -41,7 +34,7 @@ import de.greenrobot.event.EventBus;
 /**
  * Created by hp on 10/25/2016.
  */
-public class FragmentPurposeList extends Fragment implements PurposeView, OnPurposeItemClick {
+public class FragmentMeetingAdminList extends Fragment implements MeetingView, OnMeetingItemClick {
 
     View view;
 
@@ -60,16 +53,16 @@ public class FragmentPurposeList extends Fragment implements PurposeView, OnPurp
     TextView error_message;
 
     LinearLayoutManager mLayoutManager;
-    PurposePresenter purposePresenter;
-    PurposeAdapter mAdapter;
+    MeetingPresenter meetingPresenter;
+    MeetingAdapter mAdapter;
     int Pageindex = 0;
 
-    PurposeAPIResponse purposeAPIResponse = new PurposeAPIResponse();
+    MeetingResponse meetingResponse = new MeetingResponse();
 
     boolean IsSwipeRefreshLayoutActive = false;
 
-    public static FragmentPurposeList newInstance() {
-        FragmentPurposeList fragmentCompanyList = new FragmentPurposeList();
+    public static FragmentMeetingAdminList newInstance() {
+        FragmentMeetingAdminList fragmentCompanyList = new FragmentMeetingAdminList();
         return fragmentCompanyList;
     }
 
@@ -81,7 +74,7 @@ public class FragmentPurposeList extends Fragment implements PurposeView, OnPurp
         /*init butterknife*/
         ButterKnife.bind(this, view);
 
-        purposePresenter = new PurposePresenterImpl(getActivity(), this);
+        meetingPresenter = new MeetingPresenterImpl(getActivity(), this);
 
           /*recycler view properties*/
         mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
@@ -99,7 +92,7 @@ public class FragmentPurposeList extends Fragment implements PurposeView, OnPurp
         recyclerView.setHasFixedSize(true);
 
         /*setting adapter*/
-        mAdapter = new PurposeAdapter(getActivity(), purposeAPIResponse, this);
+        mAdapter = new MeetingAdapter(getActivity(), meetingResponse, this);
         recyclerView.setAdapter(mAdapter);
 
 
@@ -121,7 +114,7 @@ public class FragmentPurposeList extends Fragment implements PurposeView, OnPurp
     }
 
     private void getPurposeListData() {
-        purposePresenter.getAllPurpose();
+        meetingPresenter.getMeetingList("", Pageindex, true);
     }
 
     @Override
@@ -136,19 +129,17 @@ public class FragmentPurposeList extends Fragment implements PurposeView, OnPurp
         ButterKnife.unbind(this);
     }
 
-
     @Override
-    public void onSuccess(PurposeAPIResponse purposeAPIResponse) {
+    public void onSuccess(MeetingResponse meetingResponse) {
         if (mSwipeRefreshLayout != null) {
             if (mSwipeRefreshLayout.isRefreshing() == true) {
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         }
-        if (purposeAPIResponse != null) {
-            this.purposeAPIResponse.setPurposeList(purposeAPIResponse.getPurposeList());
+        if (meetingResponse != null) {
+            this.meetingResponse.setMeetingList(meetingResponse.getMeetingList());
             mAdapter.notifyDataSetChanged();
         }
-
     }
 
     @Override
@@ -177,7 +168,7 @@ public class FragmentPurposeList extends Fragment implements PurposeView, OnPurp
     }
 
     @Override
-    public void hideProgressView() {
+    public void hideProgress() {
         try {
             progress.setVisibility(View.GONE);
         } catch (Exception e) {
@@ -186,14 +177,12 @@ public class FragmentPurposeList extends Fragment implements PurposeView, OnPurp
     }
 
     @Override
-    public void OnPurposeItemClick(PurposeAPIResponse purposeAPIResponse, int position) {
-
-        EventBus.getDefault().postSticky(new MessageEvent(getResources().getString(R.string.purpose_selected)
-                + "," + purposeAPIResponse.getPurposeList().get(position).getPurposeName() +
-                "#" + purposeAPIResponse.getPurposeList().get(position).getPurposeID()));
+    public void OnMeetingItemClick(MeetingResponse meetingResponse, int position) {
+        EventBus.getDefault().postSticky(new MessageEvent(getResources().getString(R.string.meeting_selected)
+                + "," + meetingResponse.getMeetingList().get(position).getName() +
+                "#" + meetingResponse.getMeetingList().get(position).getMeetingID()));
 
         ((AdminActivity) getActivity()).visitorPresenter.oneStepBack();
     }
-
 }
 

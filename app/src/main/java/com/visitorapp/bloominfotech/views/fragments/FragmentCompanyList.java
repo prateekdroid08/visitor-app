@@ -25,6 +25,7 @@ import com.visitorapp.bloominfotech.presenter.companies.CompanylistPresenter;
 import com.visitorapp.bloominfotech.presenter.companies.CompanylistPresenterImpl;
 import com.visitorapp.bloominfotech.utils.SpacesItemDecoration;
 import com.visitorapp.bloominfotech.utils.ViewUtils;
+import com.visitorapp.bloominfotech.views.activity.AdminActivity;
 import com.visitorapp.bloominfotech.views.activity.HomeActivity;
 
 import butterknife.Bind;
@@ -86,8 +87,8 @@ public class FragmentCompanyList extends Fragment implements CompanyListView, On
 
         recyclerView.setHasFixedSize(true);
 /*setting adapter*/
-//        mAdapter = new CompanyAdapter(getActivity(), lstjob, this);
-//        recyclerView.setAdapter(mAdapter);
+        mAdapter = new CompanyAdapter(getActivity(), lstjob, this);
+        recyclerView.setAdapter(mAdapter);
 
 
         /*Swipe refresh layout*/
@@ -178,7 +179,7 @@ public class FragmentCompanyList extends Fragment implements CompanyListView, On
                 + "," + responseCompanies.getCompanyLists().get(position).getCompanyName() +
                 "#" + responseCompanies.getCompanyLists().get(position).getCompanyID()));
 
-        ((HomeActivity) getActivity()).visitorPresenter.oneStepBack();
+        ((AdminActivity) getActivity()).visitorPresenter.oneStepBack();
     }
 }
 

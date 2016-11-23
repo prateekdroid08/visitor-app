@@ -11,34 +11,22 @@ import android.support.v7.app.AlertDialog;
 
 import com.visitorapp.bloominfotech.VisitorActivity;
 import com.visitorapp.bloominfotech.views.fragments.FragmentAdminDetails;
+import com.visitorapp.bloominfotech.views.fragments.FragmentAdminLogin;
 import com.visitorapp.bloominfotech.views.fragments.FragmentLogin;
 
 import java.util.List;
 
 /**
- * Created by hp on 10/19/2016.
+ * Created by prateekarora on 23/11/16.
  */
-public class HomeActivity extends VisitorActivity {
+
+public class AdminActivity extends VisitorActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        visitorPresenter.navigateTo(FragmentLogin.newInstance());
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        try {
-            FragmentLogin fragmentLogin = new FragmentLogin();
-
-            if (fragmentLogin == getVisibleFragment())
-                fragmentLogin.onActivityResult(requestCode, resultCode, data);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        visitorPresenter.navigateTo(FragmentAdminLogin.newInstance());
     }
 
 
@@ -56,14 +44,19 @@ public class HomeActivity extends VisitorActivity {
 
     @Override
     public void onBackPressed() {
+
         FragmentTransaction fts = this.getSupportFragmentManager().beginTransaction();
         FragmentManager fragmentManager = this.getSupportFragmentManager();
-        if (fragmentManager.getBackStackEntryCount() > 1) {
+        if (fragmentManager.getBackStackEntryCount() > 2) {
             fragmentManager.popBackStackImmediate();
             fts.commit();
         } else {
-            finish();
+            if (fragmentManager.getBackStackEntryCount() == 2)
+                ConfirmDialog(this);
+            else
+                finish();
         }
+
     }
 
     public void ConfirmDialog(Context ctx) {// this Dialog box ask user to exit or not
@@ -75,9 +68,8 @@ public class HomeActivity extends VisitorActivity {
 
             public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
-                HomeActivity.this.visitorPresenter.navigateReplacingCurrent
-                        (FragmentAdminDetails.newInstance(), FragmentLogin.newInstance());
-                dialog.dismiss();
+                startActivity(new Intent(AdminActivity.this, HomeActivity.class));
+                finish();
             }
         });
         alert_box.setNegativeButton("No", new DialogInterface.OnClickListener() {

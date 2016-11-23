@@ -18,6 +18,7 @@ import com.visitorapp.bloominfotech.presenter.admin_login.AdminLoginView;
 import com.visitorapp.bloominfotech.utils.AppUtils;
 import com.visitorapp.bloominfotech.utils.ProgressDialog;
 import com.visitorapp.bloominfotech.utils.ViewUtils;
+import com.visitorapp.bloominfotech.views.activity.AdminActivity;
 import com.visitorapp.bloominfotech.views.activity.HomeActivity;
 
 import butterknife.Bind;
@@ -53,8 +54,8 @@ public class FragmentAdminLogin extends Fragment implements AdminLoginView {
         view = inflater.inflate(R.layout.fragment_admin_login, container, false);
  /*init butterknife*/
         ButterKnife.bind(this, view);
-        ((HomeActivity) getActivity()).toolbar.setVisibility(View.GONE);
-        ((HomeActivity) getActivity()).mToolbarTitle.setText("Admin Login");
+        ((AdminActivity) getActivity()).toolbar.setVisibility(View.GONE);
+        ((AdminActivity) getActivity()).mToolbarTitle.setText("Admin Login");
 
         adminDetailPresenter = new AdminLoginPresenterImpl(getActivity(), this);
 
@@ -99,7 +100,7 @@ public class FragmentAdminLogin extends Fragment implements AdminLoginView {
     public void onSuccess(ResponseAdminLogin responseAdminLogin) {
         if (responseAdminLogin != null) {
             if (responseAdminLogin.getIsUserValid() == true) {
-                ((HomeActivity) getActivity()).visitorPresenter.navigateReplacingCurrent(FragmentAdminLogin.newInstance(), FragmentAdminDetails.newInstance());
+                ((AdminActivity) getActivity()).visitorPresenter.navigateTo(FragmentAdminDetails.newInstance());
             } else
                 ViewUtils.showMessage(getActivity(), responseAdminLogin.getErrorIfAny());
         }

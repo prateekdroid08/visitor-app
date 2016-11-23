@@ -2,6 +2,7 @@ package com.visitorapp.bloominfotech.views.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -35,6 +36,7 @@ import com.visitorapp.bloominfotech.presenter.admin_detail.AdminDetailPresenterI
 import com.visitorapp.bloominfotech.presenter.admin_detail.AdminDetailView;
 import com.visitorapp.bloominfotech.utils.SpacesItemDecoration;
 import com.visitorapp.bloominfotech.utils.ViewUtils;
+import com.visitorapp.bloominfotech.views.activity.AdminActivity;
 import com.visitorapp.bloominfotech.views.activity.HomeActivity;
 
 import java.text.SimpleDateFormat;
@@ -76,15 +78,18 @@ public class FragmentAdminDetails extends Fragment implements AdminDetailView, O
     boolean IsSwipeRefreshLayoutActive = false;
 
 
+    public static FragmentAdminDetails fragmentAdminDetails;
+
     public static FragmentAdminDetails newInstance() {
-        FragmentAdminDetails fragmentAdminDetails = new FragmentAdminDetails();
+        if (fragmentAdminDetails == null)
+            fragmentAdminDetails = new FragmentAdminDetails();
         return fragmentAdminDetails;
     }
 
     AdminDetailPresenter adminDetailPresenter;
     private boolean loading = true;
     int pastVisiblesItems, visibleItemCount, totalItemCount;
-    private static AlertDialog.Builder alert_box;
+    AlertDialog.Builder alert_box;
 
     boolean hitAPIFromFilterYesOrNo = false;
 
@@ -267,7 +272,7 @@ public class FragmentAdminDetails extends Fragment implements AdminDetailView, O
 
     @OnClick(R.id.btn_Filter)
     public void methodAdminFilter(View view) {
-        ((HomeActivity) getActivity()).visitorPresenter.navigateTo(FragmentFilter.newInstance());
+        ((AdminActivity) getActivity()).visitorPresenter.navigateTo(FragmentFilter.newInstance());
 
     }
 
@@ -389,7 +394,7 @@ public class FragmentAdminDetails extends Fragment implements AdminDetailView, O
         bundle.putString("TimeOut", TimeOut);
         bundle.putString("TimeSpent", TimeSpent);
 
-        ((HomeActivity) getActivity()).visitorPresenter.navigateWithBundle(FragmentAdminFullDetails.newInstance(), bundle);
+        ((AdminActivity) getActivity()).visitorPresenter.navigateWithBundle(FragmentAdminFullDetails.newInstance(), bundle);
 
 
     }
@@ -398,24 +403,24 @@ public class FragmentAdminDetails extends Fragment implements AdminDetailView, O
     public void onResume() {
         super.onResume();
 
-        getView().setFocusableInTouchMode(true);
-        getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-
-                    // handle back button
-                    ConfirmDialog(getActivity());
-
-                    return true;
-
-                }
-
-                return false;
-            }
-        });
+//        getView().setFocusableInTouchMode(true);
+//        getView().requestFocus();
+//        getView().setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//
+//                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+//
+//                    // handle back button
+//                    ConfirmDialog(getActivity());
+//
+//                    return true;
+//
+//                }
+//
+//                return false;
+//            }
+//        });
     }
 
 
@@ -428,8 +433,8 @@ public class FragmentAdminDetails extends Fragment implements AdminDetailView, O
 
             public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
-                ((HomeActivity) getActivity()).visitorPresenter.navigateReplacingCurrent(FragmentAdminDetails.newInstance(), FragmentLogin.newInstance());
-                dialog.dismiss();
+                startActivity(new Intent(getActivity(), HomeActivity.class));
+                getActivity().finish();
             }
         });
         alert_box.setNegativeButton("No", new DialogInterface.OnClickListener() {

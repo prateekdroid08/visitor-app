@@ -20,6 +20,7 @@ import com.visitorapp.bloominfotech.utils.datetimepicker.DateFormat;
 import com.visitorapp.bloominfotech.utils.datetimepicker.DateTime;
 import com.visitorapp.bloominfotech.utils.datetimepicker.DateTimePicker;
 import com.visitorapp.bloominfotech.utils.datetimepicker.SimpleDateTimePicker;
+import com.visitorapp.bloominfotech.views.activity.AdminActivity;
 import com.visitorapp.bloominfotech.views.activity.HomeActivity;
 
 import java.text.DateFormatSymbols;
@@ -100,12 +101,12 @@ public class FragmentFilter extends Fragment implements View.OnClickListener {
 
     @OnClick(R.id.company_filter)
     void methodAddcompanyFilter(View view) {
-        ((HomeActivity) getActivity()).visitorPresenter.navigateTo(FragmentCompanyList.newInstance());
+        ((AdminActivity) getActivity()).visitorPresenter.navigateTo(FragmentCompanyList.newInstance());
     }
 
     @OnClick(R.id.meeting_filter)
     void methodAddMeetingFilter() {
-        ((HomeActivity) getActivity()).visitorPresenter.navigateTo(FragmentMeetingList.newInstance());
+        ((AdminActivity) getActivity()).visitorPresenter.navigateTo(FragmentMeetingAdminList.newInstance());
     }
 
 
@@ -150,7 +151,7 @@ public class FragmentFilter extends Fragment implements View.OnClickListener {
 
         EventBus.getDefault().postSticky(filterData);
 
-        ((HomeActivity) getActivity()).visitorPresenter.oneStepBack();
+        ((AdminActivity) getActivity()).visitorPresenter.oneStepBack();
 
     }
 
