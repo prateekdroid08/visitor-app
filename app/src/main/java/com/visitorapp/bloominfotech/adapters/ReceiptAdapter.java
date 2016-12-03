@@ -17,6 +17,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.visitorapp.bloominfotech.R;
 import com.visitorapp.bloominfotech.interfaces.OnCompanyItemClick;
+import com.visitorapp.bloominfotech.interfaces.OnPrintThePictureCommand;
 import com.visitorapp.bloominfotech.interfaces.OnReceiptItemClickListener;
 import com.visitorapp.bloominfotech.models.FinalReceiptModel;
 import com.visitorapp.bloominfotech.models.companies.ResponseCompanies;
@@ -33,15 +34,19 @@ import butterknife.ButterKnife;
 public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHolder> {
 
     ArrayList<FinalReceiptModel> rowItems;
-    ;
     private Context mContext;
     OnReceiptItemClickListener onReceiptItemClickListener;
+    OnPrintThePictureCommand onPrintThePictureCommand;
+
+    private int i = 0;
 
 
-    public ReceiptAdapter(Context context, ArrayList<FinalReceiptModel> rowItems, OnReceiptItemClickListener onReceiptItemClickListener) {
+    public ReceiptAdapter(Context context, ArrayList<FinalReceiptModel> rowItems,
+                          OnReceiptItemClickListener onReceiptItemClickListener,
+                          OnPrintThePictureCommand onPrintThePictureCommand) {
         this.rowItems = rowItems;
         this.mContext = context;
-
+        this.onPrintThePictureCommand = onPrintThePictureCommand;
         this.onReceiptItemClickListener = onReceiptItemClickListener;
 
     }
@@ -131,7 +136,9 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
 
                         @Override
                         public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                            contactViewHolder.mView.setVisibility(View.VISIBLE);
+                            i++;
+                            if (i == (rowItems.size() - 1))
+                                onPrintThePictureCommand.startPrinting();
                             return false;
                         }
                     })

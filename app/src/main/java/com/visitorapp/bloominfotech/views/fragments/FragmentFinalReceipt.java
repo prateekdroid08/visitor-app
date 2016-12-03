@@ -6,34 +6,42 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.print.PrintHelper;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
+import com.pixplicity.easyprefs.library.Prefs;
 import com.visitorapp.bloominfotech.R;
 import com.visitorapp.bloominfotech.adapters.CompanyAdapter;
 import com.visitorapp.bloominfotech.adapters.ReceiptAdapter;
+import com.visitorapp.bloominfotech.interfaces.OnPrintThePictureCommand;
 import com.visitorapp.bloominfotech.interfaces.OnReceiptItemClickListener;
 import com.visitorapp.bloominfotech.models.FinalReceiptModel;
 import com.visitorapp.bloominfotech.models.companies.ResponseCompanies;
@@ -59,6 +67,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Handler;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -75,7 +84,8 @@ import com.itextpdf.text.pdf.PdfWriter;
  * Created by hp on 11/7/2016.
  */
 
-public class FragmentFinalReceipt extends Fragment implements ReceiptView, OnReceiptItemClickListener {
+public class FragmentFinalReceipt extends Fragment implements ReceiptView, OnReceiptItemClickListener,
+        OnPrintThePictureCommand {
 
     View view;
 
@@ -248,12 +258,10 @@ public class FragmentFinalReceipt extends Fragment implements ReceiptView, OnRec
                 }
 
             }
-
-            System.out.println("size : " + rowItems.size());
   /*setting adapter*/
 
             if (rowItems.size() > 0) {
-                mAdapter = new ReceiptAdapter(getActivity(), rowItems, this);
+                mAdapter = new ReceiptAdapter(getActivity(), rowItems, this, this);
                 recyclerView.setAdapter(mAdapter);
                 mAdapter.notifyDataSetChanged();
             }
@@ -473,7 +481,70 @@ public class FragmentFinalReceipt extends Fragment implements ReceiptView, OnRec
         }
     }
 
+    private void saveImages() {
+        View viewHolder = view.findViewById(R.id.main__container);
+        Bitmap snapshot = null;
+        viewHolder.setDrawingCacheEnabled(true);
+        viewHolder.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH); //Quality of the snpashot
+        try {
+            viewHolder.buildDrawingCache(); // UPDATE HERE
+            snapshot = Bitmap.createBitmap(viewHolder.getDrawingCache());
+        } finally {
+            viewHolder.setDrawingCacheEnabled(false);
+        }
 
+        doPhotoPrint(snapshot);
+
+//        SimpleDateFormat dateFormat = new SimpleDateFormat(
+//                "yyyyMMddHHmmss");
+//        Date date = new Date();
+//        String name = "data" + "-" + dateFormat.format(date) + ".png";
+//        // String imageName = "TEST" + (String) name;
+//
+//        File folder = new File(Environment.getExternalStorageDirectory() +
+//                File.separator + "VisitorApp");
+//        // boolean success = false;
+//        if (!folder.exists()) {
+//            folder.mkdir();
+//        }
+//
+//        File file = new File(folder + "/VisitorApp" + name);
+//        try {
+//            file.createNewFile();
+//            FileOutputStream ostream = new FileOutputStream(file);
+//            snapshot.compress(Bitmap.CompressFormat.PNG, 100, ostream);
+//            ostream.close();
+//            Log.d("Done", "Yes");
+//            Toast.makeText(getActivity(),
+//                    "Images" + name + "save in Sd card", Toast.LENGTH_SHORT)
+//                    .show();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Log.d("Done", "No");
+//            Toast.makeText(getActivity(),
+//                    "Images in Sd card", Toast.LENGTH_SHORT).show();
+//        }
+
+    }
+
+
+    @Override
+    public void startPrinting() {
+         /* New Handler to start the Menu-Activity
+         * and close this Splash-Screen after some seconds.*/
+        new android.os.Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                saveImages();
+            }
+        }, 3000);
+    }
+
+    private void doPhotoPrint(Bitmap bitmap) {
+        PrintHelper photoPrinter = new PrintHelper(getActivity());
+        photoPrinter.setScaleMode(PrintHelper.SCALE_MODE_FIT);
+        photoPrinter.printBitmap("droids.jpg - test print", bitmap);
+    }
 }
 
 
