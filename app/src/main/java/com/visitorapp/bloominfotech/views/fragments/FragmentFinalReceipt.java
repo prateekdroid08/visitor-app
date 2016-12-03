@@ -270,6 +270,11 @@ public class FragmentFinalReceipt extends Fragment implements ReceiptView, OnRec
 
     @Override
     public void onError(String message) {
+        if (mSwipeRefreshLayout != null) {
+            if (mSwipeRefreshLayout.isRefreshing() == true) {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        }
         ViewUtils.showMessage(getActivity(), message);
     }
 
